@@ -3,9 +3,11 @@
 <title>Bioinformatics Word Cloud Generator</title>
 
 <link href="cloud.css" rel="stylesheet">
-<link rel="image_src" href="amazing.png">
-<div id="vis"></div>
 
+<div style="text-align: right"><a id="help" href="help.html" target="_blank">HELP</a></div>
+
+<div class="tooltip"></div>
+<div id="vis"></div>
 <form id="form">
   <p style="position: absolute; right: 0; top: 0" id="status"></p>
   <div style="text-align: center">
@@ -16,7 +18,7 @@
     </div>
     <div id="custom-area">
       <p><label for="text">Enter or paste genes to the next field.</label>
-      <p><textarea id="text">HLA-A HLA-B DRD2 CDKN1B NGF NAT2 SAMD3</textarea>
+      <p><textarea id="text"></textarea>
       <button id="go" type="submit">Go!</button>
     </div>
   </div>
@@ -29,14 +31,15 @@
   <!--<p><label for="colours">Colours:</label> <a href="#" id="random-palette">get random palette</a>-->
   <p><label>Download:</label>
     <a id="download-svg" href="#" target="_blank">SVG</a> |
-    <a id="download-png" href="#" target="_blank">PNG</a>
+    <a id="download-png" href="#" target="_blank">PNG</a>|
+    <a id="download-json" href="#" target="_blank">JSON</a>
 </div>
 
 <div style="float: left">
   <p><label>Spiral:</label>
     <label for="archimedean"><input type="radio" name="spiral" id="archimedean" value="archimedean" checked="checked"> Archimedean</label>
     <label for="rectangular"><input type="radio" name="spiral" id="rectangular" value="rectangular"> Rectangular</label>
-  <p><label for="scale">Scale:</label>
+  <p><label>Scale:</label>
     <label for="scale-log"><input type="radio" name="scale" id="scale-log" value="log"> log n</label>
     <label for="scale-sqrt"><input type="radio" name="scale" id="scale-sqrt" value="sqrt"> √n</label>
     <label for="scale-linear"><input type="radio" name="scale" id="scale-linear" value="linear" checked="checked"> n</label>

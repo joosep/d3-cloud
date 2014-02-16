@@ -12,7 +12,9 @@ var words = [],
     tags,
     fontSize,
     maxLength = 30,
-    statusText = d3.select("#status");
+    statusText = d3.select("#status"),
+    geneNames="HLA-A HLA-B DRD2 CDKN1B NGF NAT2 SAMD3",
+    fieldIndex=3;
 var layout = d3.layout.cloud()
     .timeInterval(10)
     .size([w, h])
@@ -31,15 +33,17 @@ var background = svg.append("g"),
 
 d3.select("#download-svg").on("click", downloadSVG);
 d3.select("#download-png").on("click", downloadPNG);
+d3.select("#download-json").on("click", downloadJSON);
 
 d3.select(window).on("hashchange", hashchange);
 
 var field = document.getElementById("field");
 var fetcher = document.getElementById("text");
+fetcher.value=geneNames;
 d3.select(window).on("load", hashchange);
 var form = d3.select("#form")
     .on("submit", function() {
-      load(d3.select("#text").property("value"));
+      load(fetcher);
       d3.event.preventDefault();
     });
 form.selectAll("input[type=number]")
@@ -51,20 +55,24 @@ form.selectAll("input[type=number]")
 form.selectAll("input[type=radio], #font")
     .on("change", generate);
 
+function updateVariables(){
+ genes = fetcher.value.split(d3.select("#per-line").property("checked") ? /\n/g : wordSeparators);
+   geneNames=genes;
+   var field_nr = field.selectedIndex;
+   if (field_nr == -1) {
+    field_nr = fieldIndex;
+   }
+   fieldIndex = field_nr;
+}
+
 wordSeparators = /[\s,\u3031-\u3035\u309b\u309c\u30a0\u30fc\uff70]+/g;
 var genes;
 var textRequest;
 function parseText(fetcher) {
-   cloud_text = "";
-   genes = fetcher.value.split(d3.select("#per-line").property("checked") ? /\n/g : wordSeparators);
-   var field_nr = field.selectedIndex;
-   if (field_nr == -1) {
-    field_nr = 3;
-   }
+   updateVariables();
    $.ajax({
-        type: "POST",
-        url: "text",
-        data: {"header" : field_nr, "genes": genes.join(" ")},
+        type: "GET",
+        url: "text?header="+fieldIndex+"&genes="+geneNames.join(" "),
         success: function(data) {
           tags = {};
           var cases = {}
@@ -75,6 +83,7 @@ function parseText(fetcher) {
           });
           tags = d3.entries(tags).sort(function(a, b) { return b.value - a.value; });
           tags.forEach(function(d) { d.key = cases[d.key]; });
+          hideBox();
           generate();
         }
      });
@@ -96,6 +105,31 @@ function generate() {
 function progress(d) {
   statusText.text(++complete + "/" + max);
 }
+function showBox(e){
+     lastClickedTag = e;
+     $.ajax({
+            type: "GET",
+            url: "statsbygenes?header="+fieldIndex+"&genes="+geneNames.join(" ")+"&tag="+e.text,
+            success: function(data) {
+              $('.tooltip')[0].innerText = data;
+              $('.tooltip').fadeIn().css(({ left:  0, top: 0 }));
+            }
+         });
+
+}
+
+var lastClickedTag = undefined;
+function toggleBox(e){
+     if ($('.tooltip').is(":visible") && lastClickedTag.text === e.text) {
+        hideBox();
+     } else {
+     showBox(e)
+    }
+}
+function hideBox(){
+    lastClickedTag = undefined;
+    $('.tooltip').fadeOut();
+}
 
 function draw(data, bounds) {
   statusText.style("display", "none");
@@ -115,9 +149,7 @@ function draw(data, bounds) {
       .attr("text-anchor", "middle")
       .attr("transform", function(d) { return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
       .style("font-size", function(d) { return d.size + "px"; })
-      .on("click", function(d) {
-        load(fetcher);
-      })
+      .on("click", toggleBox)
       .style("opacity", 1e-6)
     .transition()
       .duration(1000)
@@ -163,10 +195,16 @@ function downloadPNG() {
 }
 
 function downloadSVG() {
+
   d3.select(this).attr("href", "data:image/svg+xml;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(
     svg.attr("version", "1.1")
        .attr("xmlns", "http://www.w3.org/2000/svg")
      .node().parentNode.innerHTML))));
+}
+
+function downloadJSON() {
+   updateVariables();
+   d3.select(this).attr("href","statsbyallgenes?header="+fieldIndex+"&genes="+geneNames.join(" "))
 }
 
 function hashchange() {
@@ -316,7 +354,7 @@ function processData() {
             opt.value = i;
             field.appendChild(opt);
           }
-          field.selectedIndex = 3;
+          field.selectedIndex = fieldIndex;
         }
     });
 }

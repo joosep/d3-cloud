@@ -55,3 +55,14 @@ pre, code { font-family: "Menlo", monospace; }
 .javascript .special {
   color: #e6550d;
 }
+.tooltip {
+    margin:10px;
+    padding:12px;
+    border:2px solid #666;
+    /*width:0px;*/
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    opacity: 0.7;
+
+}

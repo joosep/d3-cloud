@@ -1,0 +1,4 @@
+Start server with 'python server.py'
+it will start the server with port 8000
+if some other port is wanted you can start the server with 'python server.py PORT_NUMBER'
+

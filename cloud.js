@@ -1,3 +1,10 @@
+if(!Object.keys) Object.keys = function(o){
+   if (o !== Object(o))
+      throw new TypeError('Object.keys called on non-object');
+   var ret=[],p;
+   for(p in o) if(Object.prototype.hasOwnProperty.call(o,p)) ret.push(p);
+   return ret;
+}
 
 var fill = d3.scale.category20b();
 
@@ -14,7 +21,8 @@ var words = [],
     maxLength = 30,
     statusText = d3.select("#status"),
     geneNames="HLA-A HLA-B DRD2 CDKN1B NGF NAT2 SAMD3",
-    fieldIndex=3;
+    header_fieldIndex=3,
+    file_fieldValue=0;
 var layout = d3.layout.cloud()
     .timeInterval(10)
     .size([w, h])
@@ -37,7 +45,11 @@ d3.select("#download-json").on("click", downloadJSON);
 
 d3.select(window).on("hashchange", hashchange);
 
-var field = document.getElementById("field");
+var header_field = document.getElementById("header_field");
+var file_field = document.getElementById("file_field");
+
+var header_desc = document.getElementById("header_desc");
+var file_desc = document.getElementById("file_desc");
 var fetcher = document.getElementById("text");
 fetcher.value=geneNames;
 d3.select(window).on("load", hashchange);
@@ -56,23 +68,30 @@ form.selectAll("input[type=radio], #font")
     .on("change", generate);
 
 function updateVariables(){
- genes = fetcher.value.split(d3.select("#per-line").property("checked") ? /\n/g : wordSeparators);
+   genes = fetcher.value.split(d3.select("#per-line").property("checked") ? /\n/g : wordSeparators);
    geneNames=genes;
-   var field_nr = field.selectedIndex;
-   if (field_nr == -1) {
-    field_nr = fieldIndex;
+   var header_field_nr = header_field.selectedIndex;
+   if (header_field_nr == -1) {
+    header_field_nr = header_fieldIndex;
    }
-   fieldIndex = field_nr;
+   header_fieldIndex = header_field_nr;
+
+   var file_field_nr = file_field.selectedIndex;
+   if (file_field_nr == -1) {
+    file_field_nr = 0;
+   }
+   file_fieldValue=fileKeys[file_field_nr]
 }
 
 wordSeparators = /[\s,\u3031-\u3035\u309b\u309c\u30a0\u30fc\uff70]+/g;
 var genes;
 var textRequest;
 function parseText(fetcher) {
+    if (fileKeys) {
    updateVariables();
    $.ajax({
         type: "GET",
-        url: "text?header="+fieldIndex+"&genes="+geneNames.join(" "),
+        url: "text?file="+file_fieldValue+"&header="+header_fieldIndex+"&genes="+geneNames.join(" "),
         success: function(data) {
           tags = {};
           var cases = {}
@@ -87,7 +106,7 @@ function parseText(fetcher) {
           generate();
         }
      });
-  
+  }
 }
 
 function generate() {
@@ -105,11 +124,12 @@ function generate() {
 function progress(d) {
   statusText.text(++complete + "/" + max);
 }
+
 function showBox(e){
      lastClickedTag = e;
      $.ajax({
             type: "GET",
-            url: "statsbygenes?header="+fieldIndex+"&genes="+geneNames.join(" ")+"&tag="+e.text,
+            url: "statsbygenes?file="+file_fieldValue+"&header="+header_fieldIndex+"&genes="+geneNames.join(" ")+"&tag="+e.text,
             success: function(data) {
               $('.tooltip')[0].innerText = data;
               $('.tooltip').fadeIn().css(({ left:  0, top: 0 }));
@@ -123,7 +143,7 @@ function toggleBox(e){
      if ($('.tooltip').is(":visible") && lastClickedTag.text === e.text) {
         hideBox();
      } else {
-     showBox(e)
+     showBox(e)(self)(self)
     }
 }
 function hideBox(){
@@ -204,7 +224,7 @@ function downloadSVG() {
 
 function downloadJSON() {
    updateVariables();
-   d3.select(this).attr("href","statsbyallgenes?header="+fieldIndex+"&genes="+geneNames.join(" "))
+   d3.select(this).attr("href","statsbyallgenes?file="+file_fieldValue+"&header="+header_fieldIndex+"&genes="+geneNames.join(" "))
 }
 
 function hashchange() {
@@ -338,23 +358,44 @@ d3.select("#random-palette").on("click", function() {
 });
 processData();
 var headers = undefined;
+var metadata = undefined;
 var headersData = undefined;
-function processData() {
-   $.ajax({
-        type: "GET",
-        url: "headers",
-        dataType: "text",
-        success: function(data) {
-          headersData = data;
-          headers = headersData.split("\|");
-          field.innerHTML = "";
+var fileKeys = undefined;
+function refreshHeadersOption(){
+          data = metadata[fileKeys[file_field.selectedIndex]];
+          headers = data.headers;
+          header_field.innerHTML = "";
           for (var i = 0 ; i < headers.length; i++) {
             var opt = document.createElement("option");
             opt.innerHTML = headers[i];
             opt.value = i;
-            field.appendChild(opt);
+            opt.title = data.header_descriptions[headers[i]]
+            header_field.appendChild(opt);
           }
-          field.selectedIndex = fieldIndex;
+          header_field.selectedIndex = data.default_header;
+}
+
+function processData() {
+   $.ajax({
+        type: "GET",
+        url: "metadata",
+        dataType: "text",
+        success: function(data) {
+          metadata = JSON.parse( data );
+          fileKeys = Object.keys(metadata)
+          file_field.innerHTML = "";
+
+          for (var i = 0 ; i < fileKeys.length; i++) {
+            var opt = document.createElement("option");
+            opt.innerHTML = fileKeys[i];
+            opt.value = i;
+            opt.title = metadata[fileKeys[i]].file_description
+            file_field.appendChild(opt);
+          }
+          file_field.selectedIndex = 0;
+          refreshHeadersOption();
+          file_field.onchange = refreshHeadersOption;
+          load(fetcher);
         }
     });
 }

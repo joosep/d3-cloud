@@ -1,3 +1,4 @@
+
 # Word Cloud Layout
 
 This is a [Wordle](http://www.wordle.net/)-inspired word cloud layout written
@@ -16,3 +17,10 @@ See the samples in `examples/`.
 This layout requires [D3](http://mbostock.github.com/d3/).  It’s similar to
 [d3.layout.force](https://github.com/mbostock/d3/wiki/Force-Layout), in that
 it’s **asynchronous** and **stateful**.
+
+## Things to add/yet-to-change
+* static url and button to generate static url
+* more input files
+* gene value converter
+* write help
+* add tooltips for headers and file

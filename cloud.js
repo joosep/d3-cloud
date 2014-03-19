@@ -6,6 +6,10 @@ if(!Object.keys) Object.keys = function(o){
    return ret;
 }
 
+function getSearchParameters() {
+      var prmstr = window.location.search.substr(1);
+      return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+}
 var fill = d3.scale.category20b();
 
 var w = 960,
@@ -23,6 +27,41 @@ var words = [],
     geneNames="HLA-A HLA-B DRD2 CDKN1B NGF NAT2 SAMD3",
     header_fieldIndex=3,
     file_fieldValue=0;
+
+var params = getSearchParameters();
+if ( params["fileID"] ) {
+file_fieldValue=params["fileID"];
+}
+if ( params["headerID"] ) {
+header_fieldIndex=params["headerID"];
+}
+if ( params["geneValues"] ) {
+geneNames=params["geneValues"];
+}
+if ( params["spiral"] ) {
+spiralValue=params["spiral"];
+}
+if ( params["scale"] ) {
+scaleValue=params["scale"];
+}
+if ( params["orientions"] ) {
+orientionsValue=params["orientions"];
+}
+if ( params["degree1"] ) {
+degree1Value=params["degree1"];
+}
+if ( params["degree2"] ) {
+degree2Value=params["degree2"];
+}
+if ( params["font"] ) {
+fontValue=params["font"];
+}
+if ( params["wordNr"] ) {
+wordNrValue=params["wordNr"];
+}
+if ( params["perline"] ) {
+perlineValue=params["perline"];
+}
 var layout = d3.layout.cloud()
     .timeInterval(10)
     .size([w, h])

@@ -5,7 +5,15 @@ if(!Object.keys) Object.keys = function(o){
    for(p in o) if(Object.prototype.hasOwnProperty.call(o,p)) ret.push(p);
    return ret;
 }
-
+function transformToAssocArray( prmstr ) {
+    var params = {};
+    var prmarr = prmstr.split("&");
+    for ( var i = 0; i < prmarr.length; i++) {
+        var tmparr = prmarr[i].split("=");
+        params[tmparr[0]] = tmparr[1];
+    }
+    return params;
+}
 function getSearchParameters() {
       var prmstr = window.location.search.substr(1);
       return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
@@ -22,6 +30,14 @@ var words = [],
     keyword = "",
     tags,
     fontSize,
+    scaleValue = "linear",
+    spiralValue = "archimedean",
+    angleCountValue = "archimedean",
+    angleFromValue = "-60",
+    angleToValue = "60",
+    fontValue = "Impact",
+    wordNrValue = "250",
+    perlineValue = false,
     maxLength = 30,
     statusText = d3.select("#status"),
     geneNames="HLA-A HLA-B DRD2 CDKN1B NGF NAT2 SAMD3",
@@ -39,28 +55,55 @@ if ( params["geneValues"] ) {
 geneNames=params["geneValues"];
 }
 if ( params["spiral"] ) {
-spiralValue=params["spiral"];
+
+        spiralValue = params["spiral"];
+    if ( spiralValue === "archimedean" ) {
+        document.getElementById("archimedean").checked = true;
+        document.getElementById("rectangular").checked = false;
+    } else {
+        document.getElementById("archimedean").checked = false;
+        document.getElementById("rectangular").checked = true;
+    }
 }
-if ( params["scale"] ) {
-scaleValue=params["scale"];
+if ( params["scale"]) {
+     scaleValue = params["scale"];
+    if ( scaleValue === document.getElementById("scale-log").value ) {
+        document.getElementById("scale-log").checked = true;
+        document.getElementById("scale-sqrt").checked = false;
+        document.getElementById("scale-linear").checked = false;
+    } else if ( scaleValue === document.getElementById("scale-sqrt").value ) {
+        document.getElementById("scale-log").checked = false;
+        document.getElementById("scale-sqrt").checked = true;
+        document.getElementById("scale-linear").checked = false;
+    } else {
+        document.getElementById("scale-log").checked = false;
+        document.getElementById("scale-sqrt").checked = false;
+        document.getElementById("scale-linear").checked = true;
+    }
 }
-if ( params["orientions"] ) {
-orientionsValue=params["orientions"];
+if ( params["angle-count"] ) {
+    angleCountValue=params["angle-count"];
+    document.getElementById("angle-count").value = angleCountValue;
 }
-if ( params["degree1"] ) {
-degree1Value=params["degree1"];
+if ( params["angle-from"] ) {
+    angleFromValue=params["angle-from"];
+    document.getElementById("angle-from").value = angleFromValue;
 }
-if ( params["degree2"] ) {
-degree2Value=params["degree2"];
+if ( params["angle-to"] ) {
+    angleToValue=params["angle-to"];
+    document.getElementById("angle-to").value = angleToValue;
 }
 if ( params["font"] ) {
-fontValue=params["font"];
+    fontValue=params["font"];
+    document.getElementById("font").value = fontValue;
 }
 if ( params["wordNr"] ) {
-wordNrValue=params["wordNr"];
+    wordNrValue=params["wordNr"];
+    document.getElementById("max").value = wordNrValue;
 }
-if ( params["perline"] ) {
-perlineValue=params["perline"];
+if ( params["per-line"] ) {
+    perlineValue=params["per-line"];
+    document.getElementById("per-line").checked = perlineValue;
 }
 var layout = d3.layout.cloud()
     .timeInterval(10)
@@ -91,6 +134,7 @@ var header_desc = document.getElementById("header_desc");
 var file_desc = document.getElementById("file_desc");
 var fetcher = document.getElementById("text");
 fetcher.value=geneNames;
+
 d3.select(window).on("load", hashchange);
 var form = d3.select("#form")
     .on("submit", function() {
@@ -119,7 +163,27 @@ function updateVariables(){
    if (file_field_nr == -1) {
     file_field_nr = 0;
    }
-   file_fieldValue=fileKeys[file_field_nr]
+   file_fieldValue=fileKeys[file_field_nr];
+
+   if (document.getElementById("archimedean").checked) {
+    spiralValue = document.getElementById("archimedean").value;
+   } else {
+    spiralValue = document.getElementById("rectangular").value;
+   }
+
+   if ( document.getElementById("scale-log").checked ) {
+    scaleValue = document.getElementById("scale-log").value;
+   } else if ( document.getElementById("scale-sqrt").checked ) {
+    scaleValue = document.getElementById("scale-sqrt").value;
+   } else {
+    scaleValue = document.getElementById("scale-linear").value;
+   }
+   angleCountValue = document.getElementById("angle-count").value;
+   angleFromValue = document.getElementById("angle-from").value;
+   angleToValue = document.getElementById("angle-to").value;
+   fontValue = document.getElementById("font").value;
+   wordNrValue = document.getElementById("max").value;
+   perlineValue = document.getElementById("per-line").checked;
 }
 
 wordSeparators = /[\s,\u3031-\u3035\u309b\u309c\u30a0\u30fc\uff70]+/g;
@@ -437,4 +501,21 @@ function processData() {
           load(fetcher);
         }
     });
+}
+
+
+function staticUrl() {
+    updateVariables();
+
+    if (perlineValue) {
+    window.location = "?fileId="+file_fieldValue+"&headerID="+header_fieldIndex+
+    "&geneValues="+geneNames+"&spiral="+spiralValue+"&scale="+scaleValue+"&angle-count="+
+    angleCountValue+"&angle-from="+angleFromValue+"&angle-to="+angleToValue+
+    "&font="+fontValue+"&wordNr="+wordNrValue+"&per-line";
+    } else {
+        window.location = "?fileId="+file_fieldValue+"&headerID="+header_fieldIndex+
+        "&geneValues="+geneNames+"&spiral="+spiralValue+"&scale="+scaleValue+"&angle-count="+
+        angleCountValue+"&angle-from="+angleFromValue+"&angle-to="+angleToValue+
+        "&font="+fontValue+"&wordNr="+wordNrValue;
+    }
 }

@@ -15,7 +15,7 @@ function transformToAssocArray( prmstr ) {
     return params;
 }
 function getSearchParameters() {
-      var prmstr = window.location.search.substr(1);
+      var prmstr = decodeURI(window.location.search.substr(1));
       return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
 }
 var fill = d3.scale.category20b();
@@ -41,6 +41,7 @@ var words = [],
     maxLength = 30,
     statusText = d3.select("#status"),
     geneNames="HLA-A HLA-B DRD2 CDKN1B NGF NAT2 SAMD3",
+    geneFieldValue=geneNames;
     header_fieldIndex=3,
     file_fieldValue=0;
 
@@ -103,7 +104,11 @@ if ( params["wordNr"] ) {
 }
 if ( params["per-line"] ) {
     perlineValue=params["per-line"];
-    document.getElementById("per-line").checked = perlineValue;
+    if (perlineValue === "true") {
+        document.getElementById("per-line").checked = true;
+   } else {
+        document.getElementById("per-line").checked = false;
+   }
 }
 var layout = d3.layout.cloud()
     .timeInterval(10)
@@ -153,6 +158,7 @@ form.selectAll("input[type=radio], #font")
 function updateVariables(){
    genes = fetcher.value.split(d3.select("#per-line").property("checked") ? /\n/g : wordSeparators);
    geneNames=genes;
+   geneFieldValue=fetcher.value;
    var header_field_nr = header_field.selectedIndex;
    if (header_field_nr == -1) {
     header_field_nr = header_fieldIndex;
@@ -183,7 +189,7 @@ function updateVariables(){
    angleToValue = document.getElementById("angle-to").value;
    fontValue = document.getElementById("font").value;
    wordNrValue = document.getElementById("max").value;
-   perlineValue = document.getElementById("per-line").checked;
+   perlineValue = d3.select("#per-line").property("checked");
 }
 
 wordSeparators = /[\s,\u3031-\u3035\u309b\u309c\u30a0\u30fc\uff70]+/g;
@@ -475,7 +481,11 @@ function refreshHeadersOption(){
             opt.title = data.header_descriptions[headers[i]]
             header_field.appendChild(opt);
           }
-          header_field.selectedIndex = data.default_header;
+          if (params["headerID"]) {
+            header_field.selectedIndex = header_fieldIndex;
+          } else {
+            header_field.selectedIndex = data.default_header;
+          }
 }
 
 function processData() {
@@ -506,16 +516,9 @@ function processData() {
 
 function staticUrl() {
     updateVariables();
-
-    if (perlineValue) {
-    window.location = "?fileId="+file_fieldValue+"&headerID="+header_fieldIndex+
-    "&geneValues="+geneNames+"&spiral="+spiralValue+"&scale="+scaleValue+"&angle-count="+
+    url = "/cloud.html?fileId="+file_fieldValue+"&headerID="+header_fieldIndex+
+    "&geneValues="+geneFieldValue+"&spiral="+spiralValue+"&scale="+scaleValue+"&angle-count="+
     angleCountValue+"&angle-from="+angleFromValue+"&angle-to="+angleToValue+
-    "&font="+fontValue+"&wordNr="+wordNrValue+"&per-line";
-    } else {
-        window.location = "?fileId="+file_fieldValue+"&headerID="+header_fieldIndex+
-        "&geneValues="+geneNames+"&spiral="+spiralValue+"&scale="+scaleValue+"&angle-count="+
-        angleCountValue+"&angle-from="+angleFromValue+"&angle-to="+angleToValue+
-        "&font="+fontValue+"&wordNr="+wordNrValue;
-    }
+    "&font="+fontValue+"&wordNr="+wordNrValue+"&per-line="+perlineValue;
+    window.location = encodeURI(url)
 }

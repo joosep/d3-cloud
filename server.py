@@ -1,4 +1,4 @@
-#!/usr/bin/python
+# !/usr/bin/python
 from urlparse import urlparse, parse_qs
 from collections import Counter
 import SimpleHTTPServer
@@ -64,7 +64,7 @@ def read_files():
                     meta_data[file_tag][FILE_DESCRIPTION] = properties[FILE_DESCRIPTION]
                 else:
                     meta_data[file_tag][FILE_DESCRIPTION] = file_tag
-                    print 'parameter '+FILE_DESCRIPTION+' missing for file ' + properties_file
+                    print 'parameter ' + FILE_DESCRIPTION + ' missing for file ' + properties_file
 
                 reader = csv.reader(csv_file, delimiter='\t')
                 headers_list = reader.next()
@@ -74,7 +74,7 @@ def read_files():
                     meta_data[file_tag][DEFAULT_HEADER] = headers_list.index(properties[DEFAULT_HEADER])
                 else:
                     meta_data[file_tag][DEFAULT_HEADER] = 0
-                    print 'parameter '+DEFAULT_HEADER+' missing for file ' + properties_file
+                    print 'parameter ' + DEFAULT_HEADER + ' missing for file ' + properties_file
 
                 del headers_list[header_loc]
                 meta_data[file_tag]['headers'] = headers_list
@@ -87,7 +87,7 @@ def read_files():
                         print 'header "' + header + '" description missing for file ' + properties_file
 
                 for row in reader:
-                    row = map(str.strip,row)
+                    row = map(str.strip, row)
                     if len(row) == (len(headers_list) + 1):
                         row_gene = row[header_loc]
                         del row[header_loc]
@@ -102,7 +102,7 @@ def read_files():
                 print properties[CSV_FILE] + ' csv loaded'
 
         else:
-            print CSV_FILE+' or '+GENE_COLUMN+' parameter is missing from ' + properties_file
+            print CSV_FILE + ' or ' + GENE_COLUMN + ' parameter is missing from ' + properties_file
 
     return
 
@@ -147,12 +147,16 @@ def get_stats_by_genes(self):
     self.send_header('Content-type', 'text/html')
     self.end_headers()
     self.wfile.write('count of "' + tag + '" per gene')
+    stats=[]
     for gene in gene_list:
         if gene in gene_map[file_field]:
             gene_text = gene_map[file_field][gene][header_index].split('|')
             count = gene_text.count(tag)
             if count > 0:
-                self.wfile.write('\r\n' + gene + ': ' + str(count))
+                stats.append({'gene': gene, 'count':count})
+    stats = sorted(stats,key=lambda k: k['count'], reverse=True)
+    for stat in stats:
+        self.wfile.write('\r\n' + stat['gene'] + ': ' + str(stat['count']))
     return
 
 
@@ -181,12 +185,13 @@ def get_stats_by_all_genes(self):
     return
 
 
-def get_error(self,error):
+def get_error(self, error):
     self.send_response(400)
     self.send_header('Content-type', 'text/html')
     self.end_headers()
     self.wfile.write(error)
     return
+
 
 def get_metadata(self):
     self.send_response(200)

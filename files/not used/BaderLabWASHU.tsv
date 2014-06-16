@@ -1,0 +1,302 @@
+initial_gene_query	primary_name	entrez_gene	citations	gene_category
+IP3R1	ITPR1	3708	917	Ion Channel
+Kca3.1	KCNN4	3783	797	Ion Channel
+Kv1.1	KCNA1	3736	758	Ion Channel
+Cav1.2	CACNA1C	775	1217	Ion Channel
+Kca1.1	KCNMA1	3778	1035	Ion Channel
+RyR1	RYR1	6261	807	Ion Channel
+Kv1.5	KCNA5	3741	725	Ion Channel
+Kir6.2	KCNJ11	3767	1209	Ion Channel
+Kv1.4	KCNA4	3739	510	Ion Channel
+Kv11.2	KCNH6	81033	568	Ion Channel
+Kv7.1	KCNQ1	3784	1149	Ion Channel
+Kv1.2	KCNA2	3737	648	Ion Channel
+Kir3.1	KCNJ3	3760	387	Ion Channel
+Kv1.3	KCNA3	3738	653	Ion Channel
+Nav1.5	SCN5A	6331	1178	Ion Channel
+Kir2.1	KCNJ2	3759	704	Ion Channel
+Kv2.1	KCNB1	3745	531	Ion Channel
+Nav1.4	SCN4A	6329	496	Ion Channel
+Kir1.1	KCNJ1	3758	387	Ion Channel
+Cav2.3	CACNA1E	777	334	Ion Channel
+Kv10.1	KCNH1	3756	832	Ion Channel
+TRPP2	PKD2	5311	506	Ion Channel
+Kv4.2	KCND2	3751	451	Ion Channel
+Kir3.2	KCNJ6	3763	261	Ion Channel
+Kv11.1	KCNH2	3757	834	Ion Channel
+Cav2.1	CACNA1A	773	714	Ion Channel
+Cav1.1	CACNA1S	779	275	Ion Channel
+Kv3.1	KCNC1	3746	200	Ion Channel
+Kir3.4	KCNJ5	3762	200	Ion Channel
+Cav1.3	CACNA1D	776	463	Ion Channel
+RyR2	RYR2	6262	662	Ion Channel
+Kv4.3	KCND3	3752	394	Ion Channel
+RyR3	RYR3	6263	197	Ion Channel
+Kir2.3	KCNJ4	3761	163	Ion Channel
+Cav3.1	CACNA1G	8913	413	Ion Channel
+Kv1.6	KCNA6	3742	163	Ion Channel
+Kir6.1	KCNJ8	3764	247	Ion Channel
+Kv7.2	KCNQ2	3785	344	Ion Channel
+Kir4.1	KCNJ10	3766	246	Ion Channel
+Kv7.3	KCNQ3	3786	256	Ion Channel
+Kv3.4	KCNC4	3749	127	Ion Channel
+TRPV1	TRPV1	7442	2202	Ion Channel
+Kca2.3	KCNN3	3782	239	Ion Channel
+Cav3.2	CACNA1H	8912	349	Ion Channel
+Nav1.8	SCN10A	6336	298	Ion Channel
+Kv3.2	KCNC2	3747	72	Ion Channel
+K2p1.1	KCNK1	3775	83	Ion Channel
+Nav1.2	SCN2A	6326	330	Ion Channel
+Nav1.6	SCN8A	6334	277	Ion Channel
+Kv2.2	KCNB2	9312	55	Ion Channel
+Kir2.2	KCNJ12	3768	111	Ion Channel
+IP3R2	ITPR2	3709	58	Ion Channel
+K2p2.1	KCNK2	3776	251	Ion Channel
+Kir3.3	KCNJ9	3765	57	Ion Channel
+Nav1.7	SCN9A	6335	304	Ion Channel
+K2p3.1	KCNK3	3777	204	Ion Channel
+Kv4.1	KCND1	3750	60	Ion Channel
+HCN2	HCN2	610	291	Ion Channel
+Cav3.3	CACNA1I	8911	149	Ion Channel
+Kca2.2	KCNN2	3781	180	Ion Channel
+Slack	KCNT1	57582	58	Ion Channel
+TRPV2	TRPV2	51393	247	Ion Channel
+KCNK4	KCNK4	50801	84	Ion Channel
+CNGA2	CNGA2	1260	147	Ion Channel
+Nav1.9	SCN11A	11280	143	Ion Channel
+Kv3.3	KCNC3	3748	60	Ion Channel
+Kv7.4	KCNQ4	9132	136	Ion Channel
+Kir4.2	KCNJ15	3772	36	Ion Channel
+Kca2.1	KCNN1	3780	107	Ion Channel
+Kir7.1	KCNJ13	3769	46	Ion Channel
+K2p5.1	KCNK5	8645	96	Ion Channel
+CNGA3	CNGA3	1261	137	Ion Channel
+CNGB1	CNGB1	1258	34	Ion Channel
+Nav1.1	SCN1A	6323	398	Ion Channel
+HCN4	HCN4	10021	241	Ion Channel
+TRPV5	TRPV5	56302	262	Ion Channel
+Nav1.3	SCN3A	6328	165	Ion Channel
+Kir5.1	KCNJ16	3773	54	Ion Channel
+K2p6.1	KCNK6	9424	30	Ion Channel
+HCN1	HCN1	609	263	Ion Channel
+TRPC2	TRPC2	7221	93	Ion Channel
+TRPV6	TRPV6	55503	295	Ion Channel
+TRPM2	TRPM2	7226	284	Ion Channel
+IP3R3	ITPR3	3710	52	Ion Channel
+Cav1.4	CACNA1F	778	97	Ion Channel
+Kv5.1	KCNF1	3754	13	Ion Channel
+Kv6.1	KCNG1	3755	14	Ion Channel
+Kv9.3	KCNS3	3790	34	Ion Channel
+CNGA1	CNGA1	1259	64	Ion Channel
+TRPP3	PKD2L1	9033	47	Ion Channel
+Nax	SCN7A	6332	33	Ion Channel
+Cav2.2	CACNA1B	774	290	Ion Channel
+Kv9.1	KCNS1	3787	10	Ion Channel
+Kv11.3	KCNH7	90134	50	Ion Channel
+Kv12.2	KCNH3	23416	15	Ion Channel
+K2p9.1	KCNK9	51305	149	Ion Channel
+HCN3	HCN3	57657	86	Ion Channel
+TRPM1	TRPM1	4308	62	Ion Channel
+Kv1.8	KCNA10	3744	13	Ion Channel
+Kv7.5	KCNQ5	56479	79	Ion Channel
+Kir2.4	KCNJ14	3770	23	Ion Channel
+CNGA4	CNGA4	1262	24	Ion Channel
+TRPML1	MCOLN1	57192	90	Ion Channel
+Kv8.1	KCNV1	27012	9	Ion Channel
+CNGB3	CNGB3	54714	43	Ion Channel
+TRPM5	TRPM5	29850	113	Ion Channel
+Kv10.2	KCNH5	27133	24	Ion Channel
+KCNK7	KCNK7	10089	4	Ion Channel
+TRPV4	TRPV4	59341	388	Ion Channel
+TRPP5	PKD2L2	27039	8	Ion Channel
+Kv1.7	KCNA7	3743	20	Ion Channel
+Kv6.2	KCNG2	26251	4	Ion Channel
+Kv9.2	KCNS2	3788	3	Ion Channel
+KCNH4	KCNH4	23415	8	Ion Channel
+KCNU1	KCNU1	157855	15	Ion Channel
+K2p10.1	KCNK10	54207	71	Ion Channel
+KCNK12	KCNK12	56660	11	Ion Channel
+K2p13.1	KCNK13	56659	16	Ion Channel
+TRPC7	TRPC7	57113	1	Ion Channel
+TPC1	TPCN1	53373	24	Ion Channel
+NALCN	VGCNL1	259232	9	Ion Channel
+Kv6.3	KCNG3	170850	16	Ion Channel
+Kv6.4	KCNG4	93107	3	Ion Channel
+Kv8.2	KCNV2	169522	18	Ion Channel
+Kv12.1	KCNH8	131096	2	Ion Channel
+KCNT2	KCNT2	343450	6	Ion Channel
+KCNK15	KCNK15	60598	9	Ion Channel
+K2p16.1	KCNK16	83795	12	Ion Channel
+KCNK17	KCNK17	89822	16	Ion Channel
+TRIK	KCNK18	338567	12	Ion Channel
+TRPC1	TRPC1	7220	0	Ion Channel
+TRPC3	TRPC3	7222	0	Ion Channel
+TRPC4	TRPC4	7223	0	Ion Channel
+TRPC5	TRPC5	7224	0	Ion Channel
+TRPC6	TRPC6	7225	0	Ion Channel
+TRPV3	TRPV3	162514	116	Ion Channel
+TRPM3	TRPM3	80036	66	Ion Channel
+TRPM4	TRPM4	54795	123	Ion Channel
+TRPM6	TRPM6	140803	125	Ion Channel
+TRPM7	TRPM7	54822	220	Ion Channel
+TRPM8	TRPM8	79054	331	Ion Channel
+TRPA1	TRPA1	8989	455	Ion Channel
+TRPML2	MCOLN2	255231	16	Ion Channel
+TRPML3	MCOLN3	55283	36	Ion Channel
+CatSper1	CATSPER1	117144	44	Ion Channel
+CatSper2	CATSPER2	117155	22	Ion Channel
+CatSper3	CATSPER3	347732	8	Ion Channel
+CatSper4	CATSPER4	378807	7	Ion Channel
+TPC2	TPCN2	219931	10	Ion Channel
+SRC	SRC	6714	17440	Kinase
+CDC2	CDK1	983	6569	Kinase
+ABL	ABL1	25	7889	Kinase
+PKA	PRKACA	5566	10080	Kinase
+EGFR	EGFR	1956	12181	Kinase
+KIT	KIT	3815	7271	Kinase
+MET	MET	4233	4560	Kinase
+ARG/abl2	ABL2	27	2609	Kinase
+LCK	LCK	3932	2306	Kinase
+PKC alpha	PRKCA	5578	2549	Kinase
+FYN	FYN	2534	2035	Kinase
+FMS	CSF1R	1436	2517	Kinase
+PKC beta	PRKCB	5579	908	Kinase
+HER2/ErbB2	ERBB2	2064	6422	Kinase
+TRKA	NTRK1	4914	2566	Kinase
+MOS	MOS	4342	706	Kinase
+CDK2	CDK2	1017	4281	Kinase
+PKC epsilon	PRKCE	5581	1023	Kinase
+LYN	LYN	4067	1494	Kinase
+MER	MERTK	10461	991	Kinase
+Erk	ERK	2048	20600	Kinase
+RET	RET	5979	2777	Kinase
+PKC delta	PRKCD	5580	1336	Kinase
+TRKB	NTRK2	4915	2113	Kinase
+CK2/casein kinase 2	CSNK2A1	1457	1601	Kinase
+PKC gamma	PRKCG	5582	349	Kinase
+ROS	ROS1	6098	4377	Kinase
+YES	YES1	7525	581	Kinase
+PKC zeta	PRKCZ	5590	789	Kinase
+TRKC	NTRK3	4916	985	Kinase
+FES	FES	2242	379	Kinase
+SYK	SYK	6850	1882	Kinase
+CDK4	CDK4	1019	3030	Kinase
+FGR	FGR	2268	304	Kinase
+Wee1	WEE1	7465	464	Kinase
+JAK	JAK2	3717	3125	Kinase
+CSK	CSK	1445	748	Kinase
+ZC4/NRK	NRK	203447	314	Kinase
+FGFR2	FGFR2	2263	944	Kinase
+BTK	BTK	695	808	Kinase
+LTK	LTK	4058	246	Kinase
+MAK	MAK	4117	417	Kinase
+FGFR1	FGFR1	2260	1239	Kinase
+HCK	HCK	3055	469	Kinase
+PKR	EIF2AK2	5610	1357	Kinase
+PRDM2	PRDM2	7799	106	Methyl-Transferase
+CARM1	CARM1	10498	233	Methyl-Transferase
+PRDM16	PRDM16	63976	73	Methyl-Transferase
+MLL	KMT2A	4297	229	Methyl-Transferase
+MDS1	MECOM	2122	159	Methyl-Transferase
+WHSC1	WHSC1	7468	165	Methyl-Transferase
+SETD2	SETD2	29072	166	Methyl-Transferase
+PRDM1	PRDM1	639	292	Methyl-Transferase
+EZH2	EZH2	2146	276	Methyl-Transferase
+ASH1L	ASH1L	55870	140	Methyl-Transferase
+PRMT1	PRMT1	3276	166	Methyl-Transferase
+SMYD5	SMYD5	10322	33	Methyl-Transferase
+MLL4	KMT2B	9757	146	Methyl-Transferase
+MLL2	KMT2D	8085	146	Methyl-Transferase
+SUV39H1	SUV39H1	6839	120	Methyl-Transferase
+SETD1A	SETD1A	9739	124	Methyl-Transferase
+PRMT5	PRMT5	10419	79	Methyl-Transferase
+SETDB1	SETDB1	9869	94	Methyl-Transferase
+NSD1	NSD1	64324	66	Methyl-Transferase
+DOT1L	DOT1L	84444	67	Methyl-Transferase
+SETD7	SETD7	80854	82	Methyl-Transferase
+MLL3	KMT2C	58508	32	Methyl-Transferase
+PRDM15	PRDM15	63977	8	Methyl-Transferase
+SETD8	SETD8	387839	32	Methyl-Transferase
+SMYD3	SMYD3	64754	35	Methyl-Transferase
+PRMT3	PRMT3	10196	22	Methyl-Transferase
+PRMT6	PRMT6	55170	25	Methyl-Transferase
+SETD6	SETD6	79918	18	Methyl-Transferase
+EZH1	EZH1	2145	8	Methyl-Transferase
+PRMT2	PRMT2	3275	13	Methyl-Transferase
+PRDM9	PRDM9	56979	21	Methyl-Transferase
+SMYD1	SMYD1	150572	12	Methyl-Transferase
+SETMAR	SETMAR	6419	20	Methyl-Transferase
+PRMT7	PRMT7	54496	15	Methyl-Transferase
+MLL5	KMT2E	55904	18	Methyl-Transferase
+SETD4	SETD4	54093	9	Methyl-Transferase
+SUV39H2	SUV39H2	79723	10	Methyl-Transferase
+WHSC1L1	WHSC1L1	54904	8	Methyl-Transferase
+PRMT8	PRMT8	56341	11	Methyl-Transferase
+SMYD2	SMYD2	56950	13	Methyl-Transferase
+SUV420H2	SUV420H2	84787	10	Methyl-Transferase
+SUV420H1	SUV420H1	51111	9	Methyl-Transferase
+PRDM14	PRDM14	63978	11	Methyl-Transferase
+PRDM5	PRDM5	11107	5	Methyl-Transferase
+PRDM4	PRDM4	11108	1	Methyl-Transferase
+SETD1B	SETD1B	23067	8	Methyl-Transferase
+PRDM6	PRDM6	93166	7	Methyl-Transferase
+SETDB2	SETDB2	83852	4	Methyl-Transferase
+PRDM7	PRDM7	11105	1	Methyl-Transferase
+PRDM8	PRDM8	56978	4	Methyl-Transferase
+PRDM12	PRDM12	59335	1	Methyl-Transferase
+PRDM10	PRDM10	56980	1	Methyl-Transferase
+SMYD4	SMYD4	114826	2	Methyl-Transferase
+EHMT1/GLP	SUV420H2	84787	2	Methyl-Transferase
+EHMT2/G9a	EHMT2	10919	2	Methyl-Transferase
+SETD3	SETD3	84193	1	Methyl-Transferase
+PRDM13	PRDM13	59336	0	Methyl-Transferase
+PRDM11	PRDM11	56981	0	Methyl-Transferase
+SETD5	SETD5	55209	0	Methyl-Transferase
+NR3A1	ESR1	2099	29833	Nuclear Hormone Receptors
+NR3C4	AR	367	20503	Nuclear Hormone Receptors
+NR1C1	PPARA	5465	8485	Nuclear Hormone Receptors
+NR1C3	PPARG	5468	8212	Nuclear Hormone Receptors
+NR3C3	PGR	5241	9831	Nuclear Hormone Receptors
+NR3C1	NR3C1	2908	8469	Nuclear Hormone Receptors
+NR3A2	ESR2	2100	3987	Nuclear Hormone Receptors
+NR1I1	VDR	7421	2939	Nuclear Hormone Receptors
+NR3C2	NR3C2	4306	2269	Nuclear Hormone Receptors
+NR1I2	NR1I2	8856	1454	Nuclear Hormone Receptors
+NR1H3	NR1H3	10062	1079	Nuclear Hormone Receptors
+NR1H2	NR1H2	7376	958	Nuclear Hormone Receptors
+NR1A1	TRA	6955	2499	Nuclear Hormone Receptors
+NR1C2	PPARD	5467	900	Nuclear Hormone Receptors
+NR1A2	TRB	6957	2408	Nuclear Hormone Receptors
+NR1H4	NR1H4	9971	792	Nuclear Hormone Receptors
+NR1B1	RARA	5914	2172	Nuclear Hormone Receptors
+NR1I3	NR1I3	9970	659	Nuclear Hormone Receptors
+NR2B1	RXRA	6256	1276	Nuclear Hormone Receptors
+NR1F3	RORC	6097	219	Nuclear Hormone Receptors
+NR4A1	NR4A1	3164	627	Nuclear Hormone Receptors
+NR4A2	NR4A2	4929	459	Nuclear Hormone Receptors
+NR1B2	NR1B2	51401	1251	Nuclear Hormone Receptors
+NR2A1	HNF4A	3172	456	Nuclear Hormone Receptors
+NR1F1	RORA	6095	336	Nuclear Hormone Receptors
+NR0B2	NR0B2	8431	323	Nuclear Hormone Receptors
+NR3B1	ESRRA	2101	254	Nuclear Hormone Receptors
+NR5A1	SF1	7536	683	Nuclear Hormone Receptors
+NR0B1	NR0B1	190	427	Nuclear Hormone Receptors
+NR1D1	NR1D1	9572	168	Nuclear Hormone Receptors
+NR1B3	RARG	5916	597	Nuclear Hormone Receptors
+NR2F2	NR2F2	7026	315	Nuclear Hormone Receptors
+NR2B2	RXRB	6257	271	Nuclear Hormone Receptors
+NR3B3	ESRRG	2104	119	Nuclear Hormone Receptors
+NR5A2	NR5A2	2494	208	Nuclear Hormone Receptors
+NR4A3	NR4A3	8013	118	Nuclear Hormone Receptors
+NR2F1	NR2F1	7025	248	Nuclear Hormone Receptors
+NR2B3	RXRG	6258	244	Nuclear Hormone Receptors
+NR1D2	NR1D2	9975	64	Nuclear Hormone Receptors
+NR2E3	NR2E3	10002	56	Nuclear Hormone Receptors
+NR3B2	ESRRB	2103	52	Nuclear Hormone Receptors
+NR1F2	RORB	6096	37	Nuclear Hormone Receptors
+NR6A1	NR6A1	2649	101	Nuclear Hormone Receptors
+NR2E1	NR2E1	7101	36	Nuclear Hormone Receptors
+NR2C1	NR2C1	7181	69	Nuclear Hormone Receptors
+NR2C2	NR2C2	7182	55	Nuclear Hormone Receptors
+NR2F6	NR2F6	2063	27	Nuclear Hormone Receptors
+NR2A2	HNF4G	3174	7	Nuclear Hormone Receptors

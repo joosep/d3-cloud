@@ -129,6 +129,7 @@ var background = svg.append("g"),
 d3.select("#download-svg").on("click", downloadSVG);
 d3.select("#download-png").on("click", downloadPNG);
 d3.select("#download-json").on("click", downloadJSON);
+d3.select("#download-csv").on("click", downloadCSV);
 
 d3.select(window).on("hashchange", hashchange);
 
@@ -234,14 +235,21 @@ function progress(d) {
   statusText.text(++complete + "/" + max);
 }
 
+function copyToClipboard() {
+  window.prompt("Copy to clipboard: Ctrl/Cmd+C, Enter", copyData);
+}
+
+var copyData = ''
 function showBox(e){
      lastClickedTag = e;
      $.ajax({
             type: "GET",
             url: "statsbygenes?file="+file_fieldValue+"&header="+header_fieldIndex+"&genes="+geneNames.join(" ")+"&tag="+e.text,
             success: function(data) {
+              copyData = data;
               $('.tooltip')[0].innerText = data;
-              $('.tooltip').fadeIn().css(({ left:  0, top: 0 }));
+              $('.tooltip').fadeIn().css(({ left:  0, top: 30 }));
+              $('.copy_link').fadeIn().css(({left: 0, top: 0 }));
             }
          });
 
@@ -258,6 +266,7 @@ function toggleBox(e){
 function hideBox(){
     lastClickedTag = undefined;
     $('.tooltip').fadeOut();
+    $('.copy_link').fadeOut();
 }
 
 function draw(data, bounds) {
@@ -333,7 +342,12 @@ function downloadSVG() {
 
 function downloadJSON() {
    updateVariables();
-   d3.select(this).attr("href","statsbyallgenes?file="+file_fieldValue+"&header="+header_fieldIndex+"&genes="+geneNames.join(" "))
+   d3.select(this).attr("href","statsbyallgenes.json?file="+file_fieldValue+"&header="+header_fieldIndex+"&genes="+geneNames.join(" "))
+}
+
+function downloadCSV() {
+   updateVariables();
+   d3.select(this).attr("href","statsbyallgenes.csv?file="+file_fieldValue+"&header="+header_fieldIndex+"&genes="+geneNames.join(" "))
 }
 
 function hashchange() {

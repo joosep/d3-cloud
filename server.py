@@ -39,7 +39,7 @@ DEFAULT_HEADER = "default_header"
 FILE_DESCRIPTION = "file_description"
 
 
-#reads in csv and creates map of lists, where one list contains all headers for gene
+# reads in csv and creates map of lists, where one list contains all headers for gene
 #what is key in the map for this list. List value is one string with all values for one header
 def read_files():
     print 'started loading csv'
@@ -147,20 +147,20 @@ def get_stats_by_genes(self):
     self.send_header('Content-type', 'text/html')
     self.end_headers()
     self.wfile.write('count of "' + tag + '" per gene')
-    stats=[]
+    stats = []
     for gene in gene_list:
         if gene in gene_map[file_field]:
             gene_text = gene_map[file_field][gene][header_index].split('|')
             count = gene_text.count(tag)
             if count > 0:
-                stats.append({'gene': gene, 'count':count})
-    stats = sorted(stats,key=lambda k: k['count'], reverse=True)
+                stats.append({'gene': gene, 'count': count})
+    stats = sorted(stats, key=lambda k: k['count'], reverse=True)
     for stat in stats:
         self.wfile.write('\r\n' + stat['gene'] + ': ' + str(stat['count']))
     return
 
 
-def get_stats_by_all_genes(self):
+def get_stats_by_all_genes(self, output='json'):
     parameters = parse_qs(urlparse(self.path).query)
     if 'file' not in parameters or 'header' not in parameters or 'genes' not in parameters:
         print '<H1>Error</H1>'
@@ -172,16 +172,35 @@ def get_stats_by_all_genes(self):
     header_index = int(parameters['header'][0])
     genes = parameters['genes'][0]
     gene_list = set(genes.split(' '))
-    self.send_response(200)
-    self.send_header('Content-type', 'application/json')
-    self.end_headers()
     genes_stats = {}
     for gene in gene_list:
         if gene in gene_map[file_field]:
             gene_text = gene_map[file_field][gene][header_index].split('|')
             counter = Counter(gene_text)
             genes_stats[gene] = counter
-    self.wfile.write(json.dumps(genes_stats, sort_keys=True, indent=4))
+    if output == 'json':
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(genes_stats, sort_keys=True, indent=4))
+    elif output == 'csv':
+        self.send_response(200)
+        self.send_header('Content-type', 'application/csv')
+        self.end_headers()
+        self.wfile.write('GENE;TAG;COUNT\r\n')
+        for gene in genes_stats:
+            print gene
+            print genes_stats[gene]
+            for tag in genes_stats[gene]:
+                print tag
+                print genes_stats[gene][tag]
+                self.wfile.write(gene + ";" + tag + ";" + str(genes_stats[gene][tag]) + "\r\n")
+    else:
+        print '<H1>Error</H1>'
+        error = 'file extension must be \'json\' or \'csv\'.'
+        print error
+        get_error(self, error)
+        return
     return
 
 
@@ -209,8 +228,10 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             get_text(self)
         elif self.path.startswith('/statsbygenes'):
             get_stats_by_genes(self)
-        elif self.path.startswith('/statsbyallgenes'):
-            get_stats_by_all_genes(self)
+        elif self.path.startswith('/statsbyallgenes.json'):
+            get_stats_by_all_genes(self, 'json')
+        elif self.path.startswith('/statsbyallgenes.csv'):
+            get_stats_by_all_genes(self, 'csv')
         else:
             logging.info('GET path: ' + self.path)
             SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)

@@ -13,11 +13,10 @@ meta_data = {}
 gene_map = {}
 
 
-def properties_to_dict(f):
-    prop_file = file(f, 'rb')
+def comments_to_properties(comments):
     prop_dict = dict()
-    for prop_line in prop_file:
-        prop_def = prop_line.strip()
+    for comment in comments:
+        prop_def = comment[1:].strip()
         if len(prop_def) == 0:
             continue
         if prop_def[0] in ('!', '#'):
@@ -27,82 +26,97 @@ def properties_to_dict(f):
         name = prop_def[:found].rstrip()
         value = prop_def[found:].lstrip(":= ").rstrip()
         prop_dict[name] = value
-    prop_file.close()
     print [prop_def.find(c) for c in ':= '] + [len(prop_def)]
     return prop_dict
 
 
-FILES = "files"
-CSV_FILE = "csv_file"
-GENE_COLUMN = 'gene_column'
-DEFAULT_HEADER = "default_header"
-FILE_DESCRIPTION = "file_description"
+FILES = 'files'
+GENE_COLUMN = 'GENE_COLUMN'
+DEFAULT_TAG_HEADER = 'DEFAULT_TAG_HEADER'
+FILE_DESCRIPTION = 'FILE_DESCRIPTION'
+ORGANISM = 'ORGANISM'
+GENE_ID_TYPE = 'GENE_ID_TYPE'
+DEFAULT_GENES = 'DEFAULT_GENES'
 
 
 # reads in csv and creates map of lists, where one list contains all headers for gene
-#what is key in the map for this list. List value is one string with all values for one header
+# what is key in the map for this list. List value is one string with all values for one header
 def read_files():
     print 'started loading csv'
-    properties_files = []
+    csv_files = []
     for f in os.listdir(FILES):
-        if f.endswith('.properties'):
-            properties_files.append(f)
-    print properties_files
-    for properties_file in properties_files:
-        properties = properties_to_dict(FILES + '/' + properties_file)
-        print properties
-        if CSV_FILE in properties and GENE_COLUMN in properties:
-            file_tag = os.path.splitext(properties_file)[0]
-            with open(FILES + '/' + properties[CSV_FILE], 'rb') as csv_file:
+        if f.endswith('.csv'):
+            csv_files.append(f)
 
+    for csv_file in csv_files:
+        with open(FILES + '/' + csv_file, 'rb') as csv_input:
+            reader = csv.reader(csv_input, delimiter='\t')
+            reading_comments = True
+            comments = []
+            while reading_comments:
+                comment = reader.next()
+                if comment[0].startswith("#"):
+                    comments.append('\t'.join(comment))
+                else:
+                    reading_comments = False
+            headers_list = comment
+            properties = comments_to_properties(comments)
+            if GENE_ID_TYPE in properties and ORGANISM in properties and GENE_COLUMN in properties:
                 global meta_data
-                meta_data[file_tag] = {}
-                meta_data[file_tag]['header_descriptions'] = {}
-                gene_map[file_tag] = {}
+                organism = properties[ORGANISM]
+                if organism not in meta_data:
+                    meta_data[organism] = {}
+                meta_data[organism][csv_file] = {}
+                csv_meta_data = meta_data[organism][csv_file]
+                csv_meta_data['header_descriptions'] = {}
+                gene_map[csv_file] = {}
 
                 if FILE_DESCRIPTION in properties:
-                    meta_data[file_tag][FILE_DESCRIPTION] = properties[FILE_DESCRIPTION]
+                    csv_meta_data[FILE_DESCRIPTION] = properties[FILE_DESCRIPTION]
                 else:
-                    meta_data[file_tag][FILE_DESCRIPTION] = file_tag
-                    print 'parameter ' + FILE_DESCRIPTION + ' missing for file ' + properties_file
-
-                reader = csv.reader(csv_file, delimiter='\t')
-                headers_list = reader.next()
+                    csv_meta_data[FILE_DESCRIPTION] = csv_file
+                    print 'parameter ' + FILE_DESCRIPTION + ' missing for file ' + csv_file
+                csv_meta_data[ORGANISM] = properties[ORGANISM]
+                csv_meta_data[GENE_ID_TYPE] = properties[GENE_ID_TYPE]
+                if DEFAULT_GENES in properties:
+                    csv_meta_data[DEFAULT_GENES] = properties[DEFAULT_GENES]
+                else:
+                    csv_meta_data[DEFAULT_GENES] = ''
+                    print 'parameter ' + DEFAULT_GENES + ' missing for file ' + csv_file
                 headers_list = map(str.strip, headers_list)
                 header_loc = headers_list.index(properties[GENE_COLUMN])
-                if DEFAULT_HEADER in properties:
-                    meta_data[file_tag][DEFAULT_HEADER] = headers_list.index(properties[DEFAULT_HEADER])
+                if DEFAULT_TAG_HEADER in properties:
+                    csv_meta_data[DEFAULT_TAG_HEADER] = headers_list.index(properties[DEFAULT_TAG_HEADER])
                 else:
-                    meta_data[file_tag][DEFAULT_HEADER] = 0
-                    print 'parameter ' + DEFAULT_HEADER + ' missing for file ' + properties_file
+                    csv_meta_data[DEFAULT_TAG_HEADER] = 0
+                    print 'parameter ' + DEFAULT_TAG_HEADER + ' missing for file ' + csv_file
 
                 del headers_list[header_loc]
-                meta_data[file_tag]['headers'] = headers_list
+                csv_meta_data['headers'] = headers_list
 
                 for header in headers_list:
                     if header in properties:
-                        meta_data[file_tag]['header_descriptions'][header] = properties[header]
+                        csv_meta_data['header_descriptions'][header] = properties[header]
                     else:
-                        meta_data[file_tag]['header_descriptions'][header] = header
-                        print 'header "' + header + '" description missing for file ' + properties_file
+                        csv_meta_data['header_descriptions'][header] = header
+                        print 'header "' + header + '" description missing for file ' + csv_file
 
                 for row in reader:
                     row = map(str.strip, row)
                     if len(row) == (len(headers_list) + 1):
                         row_gene = row[header_loc]
                         del row[header_loc]
-                        if row_gene not in gene_map[file_tag]:
-                            gene_map[file_tag][row_gene] = row
+                        if row_gene not in gene_map[csv_file]:
+                            gene_map[csv_file][row_gene] = row
                         else:
-                            gene = gene_map[file_tag][row_gene]
+                            gene = gene_map[csv_file][row_gene]
                             for i in range(min(len(row), len(headers_list))):
                                 gene[i] += '|' + row[i]
                     elif len(row) > 0:
                         print 'headers len: ', len(headers_list), ' row len:', len(row) - 1, ' first row:', row[0]
-                print properties[CSV_FILE] + ' csv loaded'
-
-        else:
-            print CSV_FILE + ' or ' + GENE_COLUMN + ' parameter is missing from ' + properties_file
+                print csv_file + ' csv loaded'
+            else:
+                print ORGANISM + ' or ' + GENE_COLUMN + ' parameter is missing from ' + csv_file
 
     return
 
@@ -173,6 +187,7 @@ def get_stats_by_all_genes(self, output='json'):
     genes = parameters['genes'][0]
     gene_list = set(genes.split(' '))
     genes_stats = {}
+    separator = '\t'
     for gene in gene_list:
         if gene in gene_map[file_field]:
             gene_text = gene_map[file_field][gene][header_index].split('|')
@@ -187,14 +202,10 @@ def get_stats_by_all_genes(self, output='json'):
         self.send_response(200)
         self.send_header('Content-type', 'application/csv')
         self.end_headers()
-        self.wfile.write('GENE;TAG;COUNT\r\n')
+        self.wfile.write('GENE' + separator + 'TAG' + separator + 'COUNT\r\n')
         for gene in genes_stats:
-            print gene
-            print genes_stats[gene]
             for tag in genes_stats[gene]:
-                print tag
-                print genes_stats[gene][tag]
-                self.wfile.write(gene + ";" + tag + ";" + str(genes_stats[gene][tag]) + "\r\n")
+                self.wfile.write(gene + separator + tag + separator + str(genes_stats[gene][tag]) + "\r\n")
     else:
         print '<H1>Error</H1>'
         error = 'file extension must be \'json\' or \'csv\'.'

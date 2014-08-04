@@ -72,9 +72,9 @@ def read_files():
                 gene_map[csv_file] = {}
 
                 if FILE_DESCRIPTION in properties:
-                    csv_meta_data[FILE_DESCRIPTION] = properties[FILE_DESCRIPTION]
+                    csv_meta_data['file_description'] = properties[FILE_DESCRIPTION]
                 else:
-                    csv_meta_data[FILE_DESCRIPTION] = csv_file
+                    csv_meta_data['file_description'] = csv_file
                     print 'parameter ' + FILE_DESCRIPTION + ' missing for file ' + csv_file
                 csv_meta_data[ORGANISM] = properties[ORGANISM]
                 csv_meta_data[GENE_ID_TYPE] = properties[GENE_ID_TYPE]

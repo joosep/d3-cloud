@@ -14,15 +14,15 @@
   <div style="text-align: center">
     <div id="presets"></div>
     <div>
-
-      <p><label for="organism_field">Select organism field for tags in the cloud</label>
-      <p><select id="organism_field"></select>
-      <p><label for="file_field">Select file field for tags in the cloud</label>
-      <p><select id="file_field"></select>
-      <p><label for="header_field">Select header field for tags in the cloud</label>
-      <p><select id="header_field"></select>
+      <label for="organism_field">Organism: </label>
+      <select id="organism_field"></select>
+      <label for="file_field">Dataset file:</label>
+      <select id="file_field"></select>
+      <label for="header_field">Header field:</label>
+      <select id="header_field"></select>
     </div>
     <div id="custom-area">
+      <p>Accepted gene ID format is <b id="gene_id_format"></b>. If needed, use <a href="http://biit.cs.ut.ee/gprofiler/gconvert.cgi" >gprofiler</a> to convert Your genes into correct format.</p>
       <p><label for="text">Enter or paste genes to the next field.</label>
       <p><textarea id="text"></textarea>
       <button id="go" type="submit">Go!</button>

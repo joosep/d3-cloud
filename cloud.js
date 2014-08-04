@@ -489,6 +489,12 @@ d3.select("#random-palette").on("click", function() {
   function dot(a, b) { return a[0] * b[0] + a[1] * b[1]; }
 
 });
+
+function updateGeneFormat(geneIdFormat){
+document.getElementById("gene_id_format").innerText=geneIdFormat;
+}
+
+
 processData();
 var headers = undefined;
 var metadata = undefined;
@@ -500,7 +506,7 @@ function refreshFilesOption(){
           data = metadata[organismKeys[organism_field.selectedIndex]];
           fileKeys= Object.keys(data)
           file_field.innerHTML = "";
-          for (var i = 0 ; i < organismKeys.length; i++) {
+          for (var i = 0 ; i < fileKeys.length; i++) {
             var opt = document.createElement("option");
             opt.innerHTML = fileKeys[i];
             opt.value = i;
@@ -512,9 +518,12 @@ function refreshFilesOption(){
           } else {
             file_field.selectedIndex = 0;
           }
+          refreshHeadersOption(fileKeys);
+          file_field.onchange = refreshHeadersOption;
 }
 function refreshHeadersOption(fileKeys){
           data = metadata[organismKeys[organism_field.selectedIndex]][fileKeys[file_field.selectedIndex]];
+          updateGeneFormat(data.GENE_ID_TYPE);
           headers = data.headers;
           header_field.innerHTML = "";
           for (var i = 0 ; i < headers.length; i++) {
@@ -540,7 +549,6 @@ function processData() {
           metadata = JSON.parse( data );
           organismKeys = Object.keys(metadata)
           organism_field.innerHTML = "";
-
           for (var i = 0 ; i < organismKeys.length; i++) {
             var opt = document.createElement("option");
             opt.innerHTML = organismKeys[i];
@@ -555,8 +563,6 @@ function processData() {
           }
           refreshFilesOption();
           organism_field.onchange = refreshFilesOption
-          refreshHeadersOption();
-          file_field.onchange = refreshHeadersOption;
           load(fetcher);
         }
     });

@@ -1,0 +1,12 @@
+DONE * Using strict notion with data files. 
+DONE   * extra information in comments before csv data
+IFFY * possibility to back up data, so if something goes wrong, there can be a way to restore it.
+DONE * gene type description/name somewhere in application
+DONE * link to gene converter somewhere in application
+DONE * CSV output of json data
+DONE * copy to clipboard on popup
+DONE * name of organism in extra information for data and possible organisms selection first in application before giving selection possible data sources, what are for selected organism.
+DONE * Also try to add all three selection to one row or two, which ever seems more nice.
+ * FIX DATASOURCES
+ * MANUAL/HELP almost done
+ * NAME REQUIRED AND OPTIONAL PARAMETERS FOR INPUT DATA

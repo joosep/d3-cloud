@@ -1,3 +1,9 @@
+#GENE_COLUMN=primary_gene_name
+#DEFAULT_TAG_HEADER=drug_class
+#FILE_DESCRIPTION=Drug interactions
+#ORGANISM=Human
+#GENE_ID_TYPE=GENE NAME(HUGO)
+#DEFAULT_GENES=MAP2K1 BRAF PIK3CA
 primary_gene_name	entrez_gene_id	reported_gene_name	pubchem_drug_id	pubchem_drug_name	source_reported_drug_name	drug_trade_name	drug_development_name	primary_drug_name	drug_class	interaction_type	pharmaceutical_developer	data_source	cancer_type
 BRAF	673	BRAF (V660) E/K	42611257	PLX4032	Vemurafenib/Zelboraf/PLX4032 RO 5185426	Vemurafenib	Zelboraf	Zelboraf	RAF Inhibitor	Inhibition	Genentech	CancerCommons	Melanoma
 BRAF	673	BRAF	44462760	GSK 2118436	Dabrafenib/GSK2118436	Dabrafenib	Dabrafenib	Dabrafenib	RAF Inhibitor	Inhibition	GlaxoSmithKline	CancerCommons	Melanoma

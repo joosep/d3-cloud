@@ -1,3 +1,9 @@
+#GENE_COLUMN=gene_target
+#DEFAULT_TAG_HEADER=interaction_type
+#FILE_DESCRIPTION=TALC drug interactions
+#ORGANISM=Human
+#GENE_ID_TYPE=GENE NAME(HUGO)
+#DEFAULT_GENES=EGFR EGFR EPHB4
 entrez_id	gene_target	drug_name	interaction_type	drug_class	drug_type	drug_generic_name	drug_trade_name	drug_synonym	interaction_id	drug_cas_number	drug_drugbank_id
 25	ABL1	Dasatinib	Inhibitor	SRC/BCR-ABL tyrosine kinase inhibitors	Small molecule TKI of SRCfamily	Dasatinib	Sprycel	BMS-354825	SML1	302962-49-8	DB01254
 207	AKT1	MK2206	Inhibitor	PI3K/AKT inhibitors AKT inhibitors	Non-ATPcompetitive allosteric Akt	NA	NA	MK2206	SML10	NA	NA
@@ -227,7 +233,7 @@ entrez_id	gene_target	drug_name	interaction_type	drug_class	drug_type	drug_gener
 3082	HGF	Rilotumumab	Inhibitor	c-MET/hepatocyte growth factor receptor (HGFR) pathway inhibitors	Human IgG2 MoAb	Rilotumumab	NA	AMG 102	SML301	NA	NA
 3082	HGF	Ficlatuzumab	Inhibitor	c-MET/hepatocyte growth factor receptor (HGFR) pathway inhibitors	Humanized IgG1 MoAb	Ficlatuzumab	NA	AV-299,SCH900105	SML302	NA	NA
 3091	HIF1A	PX-478	Inhibitor	Hypoxia-inducible factor-1 (HIF-1) inhibitor	Small molecule inhibitor	NA	NA	PX-478	SML303	NA	NA
-3091	HIF1A	EZN-2968	Inhibitor	Hypoxia-inducible factor-1 (HIF-1) inhibitor	Hypoxia-inducible factor-1 ë± (HIF- 1ë± ) messenger ribonucleic acid(mRNA) antagonist	NA	NA	EZN-2968	SML304	NA	NA
+3091	HIF1A	EZN-2968	Inhibitor	Hypoxia-inducible factor-1 (HIF-1) inhibitor	Hypoxia-inducible factor-1 (HIF- 1 ) messenger ribonucleic acid(mRNA) antagonist	NA	NA	EZN-2968	SML304	NA	NA
 3265	HRAS	ISIS 2503	Antisense oligonucleotide	Others	Antisense oligonucleotide	NA	NA	ISIS 2503	SML305	NA	NA
 3320	HSP90AA1	Retaspimycin	Inhibitor	Epigenetic modulators of gene expression or protein degradation Heat shock protein (HSP)-90 inhibitors	Water-soluble geldanamycin derivative	Retaspimycin	NA	IPI-504	SML306	NA	NA
 3320	HSP90AA1	Ganetespib	Inhibitor	Epigenetic modulators of gene expression or protein degradation Heat shock protein (HSP)-90 inhibitors	Small molecule inhibitor (nongeldanamycin)	Ganetespib	NA	STA-9090	SML307	NA	NA
@@ -274,7 +280,7 @@ entrez_id	gene_target	drug_name	interaction_type	drug_class	drug_type	drug_gener
 3791	KDR	Motesanib	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Small molecule TKI	Motesanib	NA	AMG706	SML344	NA	NA
 3791	KDR	Neovastat	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Natural product from shark cartilage	Neovastat	NA	AE941	SML345	NA	NA
 3791	KDR	Vargatef	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Small molecule TKI	NA	Vargatef	BIBF 1120	SML346	NA	NA
-3791	KDR	Ramucirumab	Inhibitor	Platelet-derived growth factoralfa   (PDGFR ë±) inhibitors	Human IgG1 MoAb	Ramucirumab	NA	IMC-3G3	SML347	NA	NA
+3791	KDR	Ramucirumab	Inhibitor	Platelet-derived growth factoralfa   (PDGFR) inhibitors	Human IgG1 MoAb	Ramucirumab	NA	IMC-3G3	SML347	NA	NA
 3791	KDR	Axitinib	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Small molecule TKI	Axitinib	NA	AG013736	SML348	NA	NA
 3791	KDR	Vatalanib	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Small molecule TKI	Vatalanib	NA	PTK787/ZK 222584	SML349	NA	NA
 9212	AURKB	AS703569	Inhibitor	Inhibitors of mitosis Aurora kinase inhibitors	Multitargeted kinase inhibitor	NA	NA	AS703569	SML35	NA	NA
@@ -392,8 +398,8 @@ entrez_id	gene_target	drug_name	interaction_type	drug_class	drug_type	drug_gener
 5133	PDCD1	MDX-1106	Antibody	Immunomodulatory agents	Human IgG4 MoAb	NA	NA	MDX-1106,BMS936558,ONO4538	SML450	NA	NA
 5156	PDGFRA	Pazopanib	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Small molecule TKI	Pazopanib	Votrient	GW786034	SML451	NA	NA
 5156	PDGFRA	Vargatef	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Small molecule TKI	NA	Vargatef	BIBF 1120	SML452	NA	NA
-5156	PDGFRA	Ramucirumab	Inhibitor	Platelet-derived growth factoralfa   (PDGFR ë±) inhibitors	Human IgG1 MoAb	Ramucirumab	NA	IMC-3G3	SML453	NA	NA
-5156	PDGFRA	MEDI-575	Inhibitor	Platelet-derived growth factoralfa   (PDGFR ë±) inhibitors	MoAb	NA	NA	MEDI-575	SML454	NA	NA
+5156	PDGFRA	Ramucirumab	Inhibitor	Platelet-derived growth factoralfa   (PDGFR) inhibitors	Human IgG1 MoAb	Ramucirumab	NA	IMC-3G3	SML453	NA	NA
+5156	PDGFRA	MEDI-575	Inhibitor	Platelet-derived growth factoralfa   (PDGFR) inhibitors	MoAb	NA	NA	MEDI-575	SML454	NA	NA
 5159	PDGFRB	Sorafenib	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Small molecule TKI	Sorafenib	Nexavar	BAY 43-9006	SML455	284461-73-0	DB00398
 5159	PDGFRB	Sunitinib	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Small molecule TKI	Sunitinib	Sutent	SU 011248	SML456	557795-19-4	DB01268
 5159	PDGFRB	Pazopanib	Inhibitor	Vascular endothelial growth factor (VEGF) and VEGF receptor (VEGFR) inhibitors	Small molecule TKI	Pazopanib	Votrient	GW786034	SML457	NA	NA
@@ -430,7 +436,7 @@ entrez_id	gene_target	drug_name	interaction_type	drug_class	drug_type	drug_gener
 5347	PLK1	GSK461364	Inhibitor	Polo-like kinase inhibitor	ATP-competitive inhibitor	NA	NA	GSK461364	SML485	NA	NA
 5347	PLK1	NMS1286937	Inhibitor	Polo-like kinase inhibitor	Small molecule inhibitor	NA	NA	NMS1286937	SML486	NA	NA
 5465	PPARA	Iloprost	NA	Others	Oral PGI2 (prostacyclin) analogue	Iloprost	Ventavis	Iloprost,Ventavis,ACT-213105	SML487	78919-13-8	DB01088
-5468	PPARG	Efatutazone	Agonist	Others	PPAR ë_, agonist	Efatutazone	NA	CS-7017,RS5444	SML488	NA	NA
+5468	PPARG	Efatutazone	Agonist	Others	PPAR, agonist	Efatutazone	NA	CS-7017,RS5444	SML488	NA	NA
 5578	PRKCA	Affinitac	Antisense oligonucleotide	Others	Antisense oligonucleotide	Affinitac	NA	NA	SML489	NA	NA
 596	BCL2	AT-101	Inhibitor	BCL-2 inhibitors	Negative enantiomer of gossypol	NA	NA	AT101	SML49	NA	NA
 5579	PRKCB	Enzastaurin	Inhibitor	Others	Small molecule serine threonine kinase inhibitor	Enzastaurin	NA	LY-317615	SML490	NA	NA

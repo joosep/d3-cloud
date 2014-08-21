@@ -1,3 +1,9 @@
+#GENE_COLUMN=gene_symbol
+#DEFAULT_TAG_HEADER=drug_name
+#FILE_DESCRIPTION=DrugBank interactions
+#ORGANISM=Human
+#GENE_ID_TYPE=GENE NAME(HUGO)
+#DEFAULT_GENES=EGFR C1QB P09871
 interaction_count	drug_id	drug_name	drug_synonyms	drug_cas_number	drug_brands	drug_type	drug_groups	drug_categories	partner_id	known_action?	target_actions	gene_symbol	uniprot_id	entrez_id	ensembl_id
 1	DB00001	Lepirudin	Hirudin variant-1	120993-53-5	Refludan	biotech	approved	Anticoagulants, Antithrombotic Agents, Fibrinolytic Agents	54	yes	inhibitor	F2	P00734	2147	ENSG00000180210
 2	DB00002	Cetuximab	Anti EGFR, IMC-C225	205923-56-4	Erbitux	biotech	approved	Antineoplastic Agents	844	yes	antagonist	EGFR	P00533	1956	ENSG00000146648

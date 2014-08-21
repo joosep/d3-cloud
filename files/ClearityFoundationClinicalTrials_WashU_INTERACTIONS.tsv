@@ -1,3 +1,9 @@
+#GENE_COLUMN=Entrez Gene Name
+#DEFAULT_TAG_HEADER=Drug name
+#FILE_DESCRIPTION=Clearity Foundation clinical trials drug interactions
+#ORGANISM=Human
+#GENE_ID_TYPE=GENE NAME(HUGO)
+#DEFAULT_GENES=AKT2 AKT3
 Molecular Target	Entrez Gene Name	Enterez Gene Id	Drug name	Other drug name	Pubchem name	CID	SID	Interaction type	Mode of action	Clinical Trial ID(s)	Detail	Phase	Include this entry?	Comments
 ALK1 ligands (TGFbeta family)	ACVRL1	94	Dalantercept	ACE-041, ALK1-Fc Fusion Protein ACE-041	Dalantercept	N/A	160693095	inhibitor	ALK1 inhibitor	NCT01720173	Recurrent epithelial ovarian cancer A Phase II Evaluation of Dalantercept (NSC #75172, IND #116598), a Novel Soluble Recombinant Activin Receptor-Like Kinase 1 (ALK-1) Inhibitor Receptor Fusion Protein, in the Treatment of Persistent or Recurrent Epithelial Ovarian, Fallopian Tube, or Primary Peritoneal Carcinoma	II	1	
 AKT1-3	AKT1	207	GSK2141795	N/A	N/A	N/A	N/A	inhibitor	Akt inhibitor	NCT01138085	Advanced Solid Tumors A Phase I Dose Escalation Open-Label Safety and Pharmacokinetic Study to Determine the Recommended Phase II Dose of GSK1120212 Dosed in Combination With GSK2141795 in Subjects With Solid Tumors (Part 1) and in Subjects With Pancreatic Cancer, Endometrial Cancer or Colorectal Cancer (Part 2)	I	1	

@@ -1,3 +1,9 @@
+#GENE_COLUMN=Gene Symbol
+#DEFAULT_TAG_HEADER=drug_name
+#FILE_DESCRIPTION=MyCancerGenome drug interactions
+#ORGANISM=Human
+#GENE_ID_TYPE=GENE NAME(HUGO)
+#DEFAULT_GENES=ABL1 AURKA ALK PIK3R3
 Gene Symbol	Entrez Gene Id	Reported Gene Name	Primary Drug Name	Drug Development Name	Drug Generic Name	Drug Trade Name	Notes	Drug Class	Interaction Type
 ABL1	25	ABL	nilotinib	AMN107	nilotinib	Tasigna		Kinase Inhibitors	inhibitor
 ABL1	25	ABL	ponatinib	AP24534	ponatinib	Iclusig		Kinase Inhibitors	inhibitor

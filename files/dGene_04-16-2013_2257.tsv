@@ -1,3 +1,9 @@
+#GENE_COLUMN=Symbol
+#DEFAULT_TAG_HEADER=class
+#FILE_DESCRIPTION=don't know what they are
+#ORGANISM=UNK
+#GENE_ID_TYPE=GENE NAME(HUGO)
+#DEFAULT_GENES=ADCYAP1R1
 tax_id	GeneID	Symbol	LocusTag	Synonyms	dbXrefs	chromosome	map_location	description	gene_type	symbol_from_authority	full_name	nomenclature_status	other_designations	modification_date	class
 9606	117	ADCYAP1R1	-	PAC1|PAC1R|PACAPR|PACAPRI	HGNC:242|MIM:102981|Ensembl:ENSG00000078549|HPRD:00045|Vega:OTTHUMG00000023884	7	7p14	adenylate cyclase activating polypeptide 1 (pituitary) receptor type I	protein-coding	ADCYAP1R1	adenylate cyclase activating polypeptide 1 (pituitary) receptor type I	O	PACAP receptor 1|PACAP type I receptor|PACAP-R1|pituitary adenylate cyclase activating polypeptide 1 receptor type I Hiphop|pituitary adenylate cyclase-activating polypeptide type I receptor	20120610	GPCR
 9606	134	ADORA1	-	RDC7	HGNC:262|MIM:102775|Ensembl:ENSG00000163485|HPRD:00042|Vega:OTTHUMG00000042125	1	1q32.1	adenosine A1 receptor	protein-coding	ADORA1	adenosine A1 receptor	O	adenosine receptor A1	20120624	GPCR

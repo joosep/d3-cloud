@@ -1,3 +1,9 @@
+#GENE_COLUMN=entrez_gene_symbol
+#DEFAULT_TAG_HEADER=drug_name
+#FILE_DESCRIPTION=interactions
+#ORGANISM=UNK
+#GENE_ID_TYPE=GENE NAME(HUGO)
+#DEFAULT_GENES=HDAC10 GABRE
 entrez_gene_symbol	gene_long_name	interaction_claim_source	interaction_types	drug_name	drug_primary_name
 HDAC10	histone deacetylase 10	TALC	inhibitor	VORINOSTAT	VORINOSTAT
 HDAC10	histone deacetylase 10	TALC	inhibitor	PANOBINOSTAT	PANOBINOSTAT

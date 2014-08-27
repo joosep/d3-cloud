@@ -491,10 +491,13 @@ d3.select("#random-palette").on("click", function() {
 });
 
 function updateGeneFormat(geneIdFormat){
-document.getElementById("gene_id_format").innerText=geneIdFormat;
+    document.getElementById("gene_id_format").innerText=geneIdFormat;
 }
-
-
+function updateGenes(genes){
+    if (genes) {
+        fetcher.value=genes
+    }
+}
 processData();
 var headers = undefined;
 var metadata = undefined;
@@ -518,12 +521,13 @@ function refreshFilesOption(){
           } else {
             file_field.selectedIndex = 0;
           }
-          refreshHeadersOption(fileKeys);
+          refreshHeadersOption();
           file_field.onchange = refreshHeadersOption;
 }
-function refreshHeadersOption(fileKeys){
+function refreshHeadersOption(){
           data = metadata[organismKeys[organism_field.selectedIndex]][fileKeys[file_field.selectedIndex]];
           updateGeneFormat(data.GENE_ID_TYPE);
+          updateGenes(data.DEFAULT_GENES)
           headers = data.headers;
           header_field.innerHTML = "";
           for (var i = 0 ; i < headers.length; i++) {
@@ -532,11 +536,13 @@ function refreshHeadersOption(fileKeys){
             opt.value = i;
             opt.title = data.header_descriptions[headers[i]]
             header_field.appendChild(opt);
+            console.log(i)
+            console.log(data.header_descriptions[headers[i]])
           }
           if (params["headerID"]) {
             header_field.selectedIndex = header_fieldValue;
           } else {
-            header_field.selectedIndex = data.default_header;
+            header_field.selectedIndex = data.DEFAULT_TAG_HEADER;
           }
 }
 

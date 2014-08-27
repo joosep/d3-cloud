@@ -45,11 +45,12 @@ def read_files():
     print 'started loading csv'
     csv_files = []
     for f in os.listdir(FILES):
-        if f.endswith('.csv'):
+        if f.endswith('.csv') or f.endswith('.tsv'):
             csv_files.append(f)
 
     for csv_file in csv_files:
         with open(FILES + '/' + csv_file, 'rb') as csv_input:
+            print "starts loading file ", csv_file
             reader = csv.reader(csv_input, delimiter='\t')
             reading_comments = True
             comments = []
@@ -85,15 +86,14 @@ def read_files():
                     print 'parameter ' + DEFAULT_GENES + ' missing for file ' + csv_file
                 headers_list = map(str.strip, headers_list)
                 header_loc = headers_list.index(properties[GENE_COLUMN])
+
+                del headers_list[header_loc]
+                csv_meta_data['headers'] = headers_list
                 if DEFAULT_TAG_HEADER in properties:
                     csv_meta_data[DEFAULT_TAG_HEADER] = headers_list.index(properties[DEFAULT_TAG_HEADER])
                 else:
                     csv_meta_data[DEFAULT_TAG_HEADER] = 0
                     print 'parameter ' + DEFAULT_TAG_HEADER + ' missing for file ' + csv_file
-
-                del headers_list[header_loc]
-                csv_meta_data['headers'] = headers_list
-
                 for header in headers_list:
                     if header in properties:
                         csv_meta_data['header_descriptions'][header] = properties[header]

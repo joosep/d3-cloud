@@ -1,5 +1,5 @@
 #GENE_COLUMN=Gene Symbol
-#DEFAULT_TAG_HEADER=drug_name
+#DEFAULT_TAG_HEADER=Drug Class
 #FILE_DESCRIPTION=MyCancerGenome drug interactions
 #ORGANISM=Human
 #GENE_ID_TYPE=GENE NAME(HUGO)

@@ -536,8 +536,6 @@ function refreshHeadersOption(){
             opt.value = i;
             opt.title = data.header_descriptions[headers[i]]
             header_field.appendChild(opt);
-            console.log(i)
-            console.log(data.header_descriptions[headers[i]])
           }
           if (params["headerID"]) {
             header_field.selectedIndex = header_fieldValue;

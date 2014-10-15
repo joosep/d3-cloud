@@ -1,84 +1,104 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>HELP page</title>
-    <link href="help.css" rel="stylesheet">
-</head>
-<body>
 
-<div>
-    <h1>Using tagcloud</h1>
-    blablablabla
-</div>
-
-<div>
-    <h1>Configuration of input files</h1>
-    Input files are in csv format with header file. <p/>
-    Before the header there must be commented metadata for current file. <p/>
-    First not commented row must contain headers. <p/>
-    Rows after that will contain the data itself.
-    <h2>Metadata</h2>
-    In metadata there are two kinds of variables: Required and optional. <p/>
-    Variables must be at the beginning of the file and each row must start with hashtag. For comments add two
-    hashtags. <p/>
-    Required values must be filled for application to understand what data is in that file. <p/>
-    Optional variables are for extra information. <p/>
-
-    <h3>Required variables</h3>
-    <table>
-        <tr>
-            <td>GENE_COLUMN</td>
-            <td>-</td>
-            <td>Header of the column from where application will get the genes.</td>
-        </tr>
-        <tr>
-            <td>ORGANISM</td>
-            <td>-</td>
-            <td>Organism name who genes are in given input file.</td>
-        </tr>
-        <tr>
-            <td>GENE_ID_TYPE</td>
-            <td>-</td>
-            <td>Name of the format in what genes in given input file are.</td>
-        </tr>
-    </table>
-    <p/>
-
-    <h3>Optional variables</h3>
-    <table>
-        <tr>
-            <td>DEFAULT_TAG_HEADER</td>
-            <td>-</td>
-            <td>Header of column what should be selected by default when selecting given input file.</td>
-        </tr>
-        <tr>
-            <td>FILE_DESCRIPTION</td>
-            <td>-</td>
-            <td>Description of the given file what will be showed in tooltip in selection of the files.</td>
-        </tr>
-        <tr>
-            <td>DEFAULT_GENES</td>
-            <td>-</td>
-            <td>Example genes what will be added to the request when selecting given input file.</td>
-        </tr>
-        <tr>
-            <td>&lt;HEADER_NAME&gt;</td>
-            <td>-</td>
-            <td>You can write description for the header, what will be showed in tooltip in selection of the headers.
-            </td>
-        </tr>
-    </table>
-    <p/>
-    For &lt;HEADER_NAME&gt; variable example: <p/>
-    if there is a header named "Disease", you can add description for that header as "#Disease=Possible Diseases" and
-    that description will show up in
-    tooltip. <p/>
-
-    <h2>Example csv</h2>
-
-    <div class="example">
-
-    </div>
-</div>
-</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr">
+    <head>
+       <title>HELP page</title>
+        <link href="help.css" rel="stylesheet">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="en" />
+        <meta name="language" content="en" />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="joosep, 2014" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="expand.js"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="content"> 
+                <h1 class="heading">Geneswordle manual</h1>
+                <p>This page will first show how to use Geneswordle, and after that how to add new files to it.</p>
+                <div class="demo">
+                    <h2> 1. Using Geneswordle </h2>
+                    <div class="collapse">
+                        <p>NOTHING ADDED HERE YET</p>
+                    </div>
+                </div>
+                <div class="demo">
+                    <h2>2. Configuration of input files</h2>
+                    <h3 class="expand">2.1. Overview</h3>
+                    <div class="collapse">
+                        <p>Input files are in csv format with header file. </p>
+                        <p>Before the header there must be commented metadata for current file. </p>
+                        <p>First not commented row must contain headers.</p>
+                        <p>Rows after that will contain the data itself.</p>
+                    </div>
+                    <h3 class="expand">2.2. Metadata</h3>
+                    <div class="collapse">
+                       <p>In metadata there are two kinds of variables: Required and optional. </p>
+                       <p>Variables must be at the beginning of the file and each row must start with hashtag. For comments add two hashtags. </p>
+                       <p>Required values must be filled for application to understand what data is in that file. </p>
+                       <p>Optional variables are for extra information. </p>
+                       <h4 class="expand1">Required variables</h4>
+                       <div class="collapse1">
+                            <p><table>
+                                <tr>
+                                    <td>GENE_COLUMN</td>
+                                    <td>-</td>
+                                    <td>Header of the column from where application will get the genes.</td>
+                                </tr>
+                                <tr>
+                                    <td>ORGANISM</td>
+                                    <td>-</td>
+                                    <td>Organism name who genes are in given input file.</td>
+                                </tr>
+                                <tr>
+                                    <td>GENE_ID_TYPE</td>
+                                    <td>-</td>
+                                    <td>Name of the format in what genes in given input file are.</td>
+                                </tr>
+                            </table>
+                            </p>
+                        </div>
+                        <h4 class="expand1">Optional variables</h4>
+                        <div class="collapse1">
+                            <p><table>
+                                <tr>
+                                    <td>DEFAULT_TAG_HEADER</td>
+                                    <td>-</td>
+                                    <td>Header of column what should be selected by default when selecting given input file.</td>
+                                </tr>
+                                <tr>
+                                    <td>FILE_DESCRIPTION</td>
+                                    <td>-</td>
+                                    <td>Description of the given file what will be showed in tooltip in selection of the files.</td>
+                                </tr>
+                                <tr>
+                                    <td>DEFAULT_GENES</td>
+                                    <td>-</td>
+                                    <td>Example genes what will be added to the request when selecting given input file.</td>
+                                </tr>
+                                <tr>
+                                    <td>&lt;HEADER_NAME&gt;</td>
+                                    <td>-</td>
+                                    <td>You can write description for the header, what will be showed in tooltip in selection of the headers.
+                                    </td>
+                                </tr>
+                            </table>
+                            </p>
+                            <p>For &lt;HEADER_NAME&gt; variable example:  if there is a header named "Disease", you can add description for that header as "#Disease=Possible Diseases" and
+                            that description will show up in
+                            tooltip. </p>
+                        </div>
+                    </div>
+                    <h3 class="expand">2.3. Example csv</h3>
+                    <div class="collapse">
+                        <div class="example">
+                            <p>NOT YET ADDED</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

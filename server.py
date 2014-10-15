@@ -261,6 +261,6 @@ if __name__ == '__main__':
 
     read_files()
     Handler = ServerHandler
-    httpd = SocketServer.TCPServer(('', PORT), Handler)
+    httpd = SocketServer.TCPServer((I, PORT), Handler)
     print 'Serving at: http://%(interface)s:%(port)s' % dict(interface=I or 'localhost', port=PORT)
     httpd.serve_forever()

@@ -142,13 +142,13 @@ var header_field = document.getElementById("header_field");
 var file_field = document.getElementById("file_field");
 var organism_field = document.getElementById("organism_field");
 
-var fetcher = document.getElementById("text");
-fetcher.value=geneNames;
+var gene_text_field = document.getElementById("text");
+gene_text_field.value=geneNames;
 
 d3.select(window).on("load", hashchange);
 var form = d3.select("#form")
     .on("submit", function() {
-      load(fetcher);
+      load(gene_text_field);
       d3.event.preventDefault();
     });
 form.selectAll("input[type=number]")
@@ -161,9 +161,9 @@ form.selectAll("input[type=radio], #font")
     .on("change", generate);
 
 function updateVariables(){
-   genes = fetcher.value.split(d3.select("#per-line").property("checked") ? /\n/g : wordSeparators);
+   genes = gene_text_field.value.split(d3.select("#per-line").property("checked") ? /\n/g : wordSeparators);
    geneNames=genes;
-   geneFieldValue=fetcher.value;
+   geneFieldValue=gene_text_field.value;
 
    var organism_field_nr = organism_field.selectedIndex;
    if (organism_field_nr == -1) {
@@ -211,29 +211,31 @@ function updateVariables(){
 wordSeparators = /[\s,\u3031-\u3035\u309b\u309c\u30a0\u30fc\uff70]+/g;
 var genes;
 var textRequest;
-function parseText(fetcher) {
+function parseText() {
     if (fileKeys) {
    updateVariables();
    $.ajax({
         type: "GET",
-        url: "text?organism="+organism_fieldValue+"&file="+file_fieldValue+"&header="+header_fieldValue+"&genes="+geneNames.join(" "),
-        success: function(data) {
-          tags = {};
-          var cases = {}
-          textRequest = data;
-          textRequest.split("\|").forEach(function(word) {
-            cases[word.toLowerCase()] = word;
-            tags[word = word.toLowerCase()] = (tags[word] || 0) + 1;
-          });
-          tags = d3.entries(tags).sort(function(a, b) { return b.value - a.value; });
-          tags.forEach(function(d) { d.key = cases[d.key]; });
-          hideBox();
-          generate();
-        },
-        error: function(xhr, textStatus, errorThrown){
-            resetApplicationOnFail()
-        }
-     });
+        url: "text?organism="+organism_fieldValue+"&file="+file_fieldValue+"&header="+header_fieldValue+"&genes="+geneNames.join(" ")
+     })
+    .done(function(data) {
+        tags = {};
+        var cases = {}
+        textRequest = data;
+        textRequest.split("\|").forEach(function(word) {
+        cases[word.toLowerCase()] = word;
+        tags[word = word.toLowerCase()] = (tags[word] || 0) + 1;
+        });
+        tags = d3.entries(tags).sort(function(a, b) { return b.value - a.value; });
+        tags.forEach(function(d) { d.key = cases[d.key]; });
+        hideBox();
+        generate();
+    })
+    .fail(function(jqXHR,textStatus,errorThrown){
+            if (jqXHR.readyState == 4) {
+                resetApplicationOnFail();
+            }
+    });
   }
 }
 
@@ -262,18 +264,19 @@ function showBox(e){
      lastClickedTag = e;
      $.ajax({
             type: "GET",
-            url: "statsbygenes?organism="+organism_fieldValue+"&file="+file_fieldValue+"&header="+header_fieldValue+"&genes="+geneNames.join(" ")+"&tag="+e.text,
-            success: function(data) {
-              copyData = data;
-              $('.tooltip')[0].innerText = data;
-              $('.tooltip').fadeIn().css(({ left:  0, top: 30 }));
-              $('.copy_link').fadeIn().css(({left: 0, top: 0 }));
-            },
-            error: function(xhr, textStatus, errorThrown){
-               resetApplicationOnFail()
-            }
-         });
-
+            url: "statsbygenes?organism="+organism_fieldValue+"&file="+file_fieldValue+"&header="+header_fieldValue+"&genes="+geneNames.join(" ")+"&tag="+e.text
+         })
+     .done(function(data) {
+        copyData = data;
+        $('.tooltip')[0].innerText = data;
+        $('.tooltip').fadeIn().css(({ left:  0, top: 30 }));
+        $('.copy_link').fadeIn().css(({left: 0, top: 0 }));
+      })
+     .fail(function(jqXHR,textStatus,errorThrown){
+            if (jqXHR.readyState == 4) {
+                resetApplicationOnFail();
+           }
+        });
 }
 
 var lastClickedTag = undefined;
@@ -372,11 +375,11 @@ function downloadCSV() {
 }
 
 function hashchange() {
-  load(fetcher);
+  load(gene_text_field);
 }
 
 function load(f) {
-    if (f) parseText(f);
+    if (f) parseText();
 }
 
 d3.select("#random-palette").on("click", function() {
@@ -510,7 +513,7 @@ function updateFileDescription(file_description,file_uploader){
 }
 function updateGenes(genes){
     if (genes) {
-        fetcher.value=genes
+        gene_text_field.value=genes
     }
 }
 processData();
@@ -528,11 +531,11 @@ function refreshFilesOption(){
             var opt = document.createElement("option");
             opt.innerHTML = fileKeys[i];
             opt.value = i;
-            opt.title = data[fileKeys[i]].file_description
+            opt.title = data[fileKeys[i]].FILE_DESCRIPTION
             file_field.appendChild(opt);
           }
-          if (params["fileName"]) {
-            file_field.selectedIndex = fileKeys.indexOf(file_fieldValue);
+          if (params["fileName"] && fileKeys.indexOf(params["fileName"]) != -1) {
+            file_field.selectedIndex = fileKeys.indexOf(params["fileName"]);
           } else {
             file_field.selectedIndex = 0;
           }
@@ -554,8 +557,8 @@ function refreshHeadersOption(){
             opt.title = data.header_descriptions[headers[i]]
             header_field.appendChild(opt);
           }
-          if (params["headerName"]) {
-            header_field.selectedIndex = headers.indexOf(header_fieldValue);
+          if (params["headerName"] && headers.indexOf(params["headerName"]) != -1) {
+            header_field.selectedIndex = headers.indexOf(params["headerName"]);
           } else {
             header_field.selectedIndex = headers.indexOf(data.DEFAULT_TAG_HEADER);
           }
@@ -565,30 +568,32 @@ function processData() {
    $.ajax({
         type: "GET",
         url: "metadata",
-        dataType: "text",
-        success: function(data) {
-          metadata = JSON.parse( data );
-          organismKeys = Object.keys(metadata)
-          organism_field.innerHTML = "";
-          for (var i = 0 ; i < organismKeys.length; i++) {
-            var opt = document.createElement("option");
-            opt.innerHTML = organismKeys[i];
-            opt.value = i;
-            opt.title = organismKeys[i];
-            organism_field.appendChild(opt);
-          }
-          if (params["organismName"]) {
-            organism_field.selectedIndex = organismKeys.indexOf(params["organismName"]);
-          } else {
-            organism_field.selectedIndex = 0;
-          }
-          refreshFilesOption();
-          organism_field.onchange = refreshFilesOption
-          load(fetcher);
-        },
-        error: function(xhr, textStatus, errorThrown){
-            resetApplicationOnFail()
+        dataType: "text"
+    })
+    .done(function(data) {
+        metadata = JSON.parse( data );
+        organismKeys = Object.keys(metadata)
+        organism_field.innerHTML = "";
+        for (var i = 0 ; i < organismKeys.length; i++) {
+        var opt = document.createElement("option");
+        opt.innerHTML = organismKeys[i];
+        opt.value = i;
+        opt.title = organismKeys[i];
+        organism_field.appendChild(opt);
         }
+        if (params["organismName"] && organismKeys.indexOf(params["organismName"]) != -1) {
+        organism_field.selectedIndex = organismKeys.indexOf(params["organismName"]);
+        } else {
+        organism_field.selectedIndex = 0;
+        }
+        refreshFilesOption();
+        organism_field.onchange = refreshFilesOption
+        load(gene_text_field);
+    })
+    .fail(function(jqXHR,textStatus,errorThrown){
+            if (jqXHR.readyState == 4) {
+                resetApplicationOnFail();
+            }
     });
 }
 

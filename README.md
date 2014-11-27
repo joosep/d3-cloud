@@ -11,4 +11,10 @@ Download the project and run python service: "python server.py".
 That will create service at localhost:8000/cloud.html.
 It's possible to add some other port when starting server: "python server.py 8080".
 
-New data is added as copy rightly formatted csv (see application help page) into files folder and removed as removing csv from files folder. After changing files, service restart is needed.
+New data withrightly formatted csv/tsv (see application help page) is added when data is  placed into files folder and data is removed when csv/tsv file is removed from files folder. With adding or removing files from files folder, service updates automatically it's content. 
+
+
+## Needed tools for running application:
+python 2.7
+python watchdog library
+

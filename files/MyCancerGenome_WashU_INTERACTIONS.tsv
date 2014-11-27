@@ -2,6 +2,7 @@
 #DEFAULT_TAG_HEADER=Drug Class
 #FILE_DESCRIPTION=MyCancerGenome drug interactions
 #ORGANISM=Human
+#UPLOADER=default
 #GENE_ID_TYPE=GENE NAME(HUGO)
 #DEFAULT_GENES=ABL1 AURKA ALK PIK3R3
 Gene Symbol	Entrez Gene Id	Reported Gene Name	Primary Drug Name	Drug Development Name	Drug Generic Name	Drug Trade Name	Notes	Drug Class	Interaction Type

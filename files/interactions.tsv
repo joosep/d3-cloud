@@ -2,6 +2,7 @@
 #DEFAULT_TAG_HEADER=drug_name
 #FILE_DESCRIPTION=interactions
 #ORGANISM=UNK
+#UPLOADER=default
 #GENE_ID_TYPE=GENE NAME(HUGO)
 #DEFAULT_GENES=HDAC10 GABRE
 entrez_gene_symbol	gene_long_name	interaction_claim_source	interaction_types	drug_name	drug_primary_name

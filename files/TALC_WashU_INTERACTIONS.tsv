@@ -2,6 +2,7 @@
 #DEFAULT_TAG_HEADER=interaction_type
 #FILE_DESCRIPTION=TALC drug interactions
 #ORGANISM=Human
+#UPLOADER=default
 #GENE_ID_TYPE=GENE NAME(HUGO)
 #DEFAULT_GENES=EGFR EGFR EPHB4
 entrez_id	gene_target	drug_name	interaction_type	drug_class	drug_type	drug_generic_name	drug_trade_name	drug_synonym	interaction_id	drug_cas_number	drug_drugbank_id

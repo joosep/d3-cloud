@@ -42,19 +42,20 @@ var words = [],
     statusText = d3.select("#status"),
     geneNames="HLA-A HLA-B DRD2 CDKN1B NGF NAT2 SAMD3",
     geneFieldValue=geneNames;
-    header_fieldValue=3,
-    file_fieldValue=0;
+    header_fieldValue=0,
+    file_fieldValue=0,
     organism_fieldValue=0;
 
 var params = getSearchParameters();
-if ( params["fileID"] ) {
-file_fieldValue=params["fileID"];
+
+if ( params["organismName"] ) {
+organism_fieldValue=params["organismName"];
 }
-if ( params["organismID"] ) {
-organism_fieldValue=params["organismID"];
+if ( params["fileName"] ) {
+file_fieldValue=params["fileName"];
 }
-if ( params["headerID"] ) {
-header_fieldValue=params["headerID"];
+if ( params["headerName"] ) {
+header_fieldValue=params["headerName"];
 }
 if ( params["geneValues"] ) {
 geneNames=params["geneValues"];
@@ -141,8 +142,6 @@ var header_field = document.getElementById("header_field");
 var file_field = document.getElementById("file_field");
 var organism_field = document.getElementById("organism_field");
 
-var header_desc = document.getElementById("header_desc");
-var file_desc = document.getElementById("file_desc");
 var fetcher = document.getElementById("text");
 fetcher.value=geneNames;
 
@@ -165,23 +164,29 @@ function updateVariables(){
    genes = fetcher.value.split(d3.select("#per-line").property("checked") ? /\n/g : wordSeparators);
    geneNames=genes;
    geneFieldValue=fetcher.value;
-   var header_field_nr = header_field.selectedIndex;
-   if (header_field_nr == -1) {
-    header_field_nr = header_fieldValue;
-   }
-   header_fieldValue = header_field_nr;
-
-   var file_field_nr = file_field.selectedIndex;
-   if (file_field_nr == -1) {
-    file_field_nr = 0;
-   }
-   file_fieldValue=fileKeys[file_field_nr];
 
    var organism_field_nr = organism_field.selectedIndex;
    if (organism_field_nr == -1) {
     organism_field_nr = 0;
+    organism_field.selectedIndex = 0;
    }
-   organism_fieldValue=fileKeys[organism_field_nr];
+   organism_fieldValue=organismKeys[organism_field_nr];
+
+   var file_field_nr = file_field.selectedIndex;
+   if (file_field_nr == -1) {
+    file_field_nr = 0;
+    file_field.selectedIndex=0;
+   }
+   file_fieldValue=fileKeys[file_field_nr];
+
+   var header_field_nr = header_field.selectedIndex;
+   if (header_field_nr == -1) {
+    header_fieldValue = metadata[organism_fieldValue][file_fieldValue].DEFAULT_TAG_HEADER;
+    header_field.selectedIndex = metadata[organism_fieldValue][file_fieldValue].headers[header_fieldValue]
+   } else {
+    header_fieldValue = metadata[organism_fieldValue][file_fieldValue].headers[header_field_nr];
+   }
+
    if (document.getElementById("archimedean").checked) {
     spiralValue = document.getElementById("archimedean").value;
    } else {
@@ -224,6 +229,9 @@ function parseText(fetcher) {
           tags.forEach(function(d) { d.key = cases[d.key]; });
           hideBox();
           generate();
+        },
+        error: function(xhr, textStatus, errorThrown){
+            resetApplicationOnFail()
         }
      });
   }
@@ -260,6 +268,9 @@ function showBox(e){
               $('.tooltip')[0].innerText = data;
               $('.tooltip').fadeIn().css(({ left:  0, top: 30 }));
               $('.copy_link').fadeIn().css(({left: 0, top: 0 }));
+            },
+            error: function(xhr, textStatus, errorThrown){
+               resetApplicationOnFail()
             }
          });
 
@@ -270,7 +281,7 @@ function toggleBox(e){
      if ($('.tooltip').is(":visible") && lastClickedTag.text === e.text) {
         hideBox();
      } else {
-     showBox(e)(self)(self)
+     showBox(e)
     }
 }
 function hideBox(){
@@ -493,6 +504,10 @@ d3.select("#random-palette").on("click", function() {
 function updateGeneFormat(geneIdFormat){
     document.getElementById("gene_id_format").innerText=geneIdFormat;
 }
+
+function updateFileDescription(file_description,file_uploader){
+    document.getElementById("file_description").innerText=file_description+" (uploader: "+file_uploader+")";
+}
 function updateGenes(genes){
     if (genes) {
         fetcher.value=genes
@@ -516,18 +531,20 @@ function refreshFilesOption(){
             opt.title = data[fileKeys[i]].file_description
             file_field.appendChild(opt);
           }
-          if (params["fileID"]) {
-            file_field.selectedIndex = file_fieldValue;
+          if (params["fileName"]) {
+            file_field.selectedIndex = fileKeys.indexOf(file_fieldValue);
           } else {
             file_field.selectedIndex = 0;
           }
           refreshHeadersOption();
+
           file_field.onchange = refreshHeadersOption;
 }
 function refreshHeadersOption(){
           data = metadata[organismKeys[organism_field.selectedIndex]][fileKeys[file_field.selectedIndex]];
+          updateFileDescription(data.FILE_DESCRIPTION,data.UPLOADER);
           updateGeneFormat(data.GENE_ID_TYPE);
-          updateGenes(data.DEFAULT_GENES)
+          updateGenes(data.DEFAULT_GENES);
           headers = data.headers;
           header_field.innerHTML = "";
           for (var i = 0 ; i < headers.length; i++) {
@@ -537,10 +554,10 @@ function refreshHeadersOption(){
             opt.title = data.header_descriptions[headers[i]]
             header_field.appendChild(opt);
           }
-          if (params["headerID"]) {
-            header_field.selectedIndex = header_fieldValue;
+          if (params["headerName"]) {
+            header_field.selectedIndex = headers.indexOf(header_fieldValue);
           } else {
-            header_field.selectedIndex = data.DEFAULT_TAG_HEADER;
+            header_field.selectedIndex = headers.indexOf(data.DEFAULT_TAG_HEADER);
           }
 }
 
@@ -560,22 +577,29 @@ function processData() {
             opt.title = organismKeys[i];
             organism_field.appendChild(opt);
           }
-          if (params["organismID"]) {
-            organism_field.selectedIndex = organism_fieldValue;
+          if (params["organismName"]) {
+            organism_field.selectedIndex = organismKeys.indexOf(params["organismName"]);
           } else {
             organism_field.selectedIndex = 0;
           }
           refreshFilesOption();
           organism_field.onchange = refreshFilesOption
           load(fetcher);
+        },
+        error: function(xhr, textStatus, errorThrown){
+            resetApplicationOnFail()
         }
     });
 }
 
+function resetApplicationOnFail() {
+    alert("Request failed because service data has been updated. Will reset application");
+    processData();
+}
 
 function staticUrl() {
     updateVariables();
-    url = "/cloud.html?organismID="+organism_fieldValue+"&fileID="+file_fieldValue+"&headerID="+header_fieldValue+
+    url = "/cloud.html?organismName="+organism_fieldValue+"&fileName="+file_fieldValue+"&headerName="+header_fieldValue+
     "&geneValues="+geneFieldValue+"&spiral="+spiralValue+"&scale="+scaleValue+"&angle-count="+
     angleCountValue+"&angle-from="+angleFromValue+"&angle-to="+angleToValue+
     "&font="+fontValue+"&wordNr="+wordNrValue+"&per-line="+perlineValue;

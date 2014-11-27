@@ -2,6 +2,7 @@
 #DEFAULT_TAG_HEADER=drug_name
 #FILE_DESCRIPTION=Clearity Foundation drug interactions
 #ORGANISM=Human
+#UPLOADER=default
 #GENE_ID_TYPE=GENE NAME(HUGO)
 #DEFAULT_GENES=AKT1 ATM
 gene_name	entrez_gene_id	reported_drug_response	reported_gene_name	drug_name	drug_trade_name	pubchem_id	drug_class	drug_subclass	linked_class_info	interaction_type

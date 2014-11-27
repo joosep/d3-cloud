@@ -2,6 +2,7 @@
 #DEFAULT_TAG_HEADER=class
 #FILE_DESCRIPTION=don't know what they are
 #ORGANISM=UNK
+#UPLOADER=default
 #GENE_ID_TYPE=GENE NAME(HUGO)
 #DEFAULT_GENES=ADCYAP1R1
 tax_id	GeneID	Symbol	LocusTag	Synonyms	dbXrefs	chromosome	map_location	description	gene_type	symbol_from_authority	full_name	nomenclature_status	other_designations	modification_date	class

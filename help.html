@@ -16,10 +16,10 @@
     <body>
         <div id="wrapper">
             <div id="content"> 
-                <h1 class="heading">Geneswordle manual</h1>
-                <p>This page will first show how to use Geneswordle, and after that how to add new files to it.</p>
+                <h1 class="heading">Genewordclouds manual</h1>
+                <p>This page will first show how to use Genewordclouds, and after that how to add new files to it.</p>
                 <div class="demo">
-                    <h2> 1. Using Geneswordle </h2>
+                    <h2> 1. Using Genewordclouds </h2>
                     <div class="collapse">
                         <p>NOTHING ADDED HERE YET</p>
                     </div>
@@ -32,6 +32,7 @@
                         <p>Before the header there must be commented metadata for current file. </p>
                         <p>First not commented row must contain headers.</p>
                         <p>Rows after that will contain the data itself.</p>
+                        <p>If file is not in correct form, it will be ignored.</p>
                     </div>
                     <h3 class="expand">2.2. Metadata</h3>
                     <div class="collapse">
@@ -51,6 +52,11 @@
                                     <td>ORGANISM</td>
                                     <td>-</td>
                                     <td>Organism name who genes are in given input file.</td>
+                                </tr>
+                                <tr>
+                                    <td>UPLOADER</td>
+                                    <td>-</td>
+                                    <td>Name of the user, who uploaded given csv file.</td>
                                 </tr>
                                 <tr>
                                     <td>GENE_ID_TYPE</td>
@@ -99,6 +105,7 @@
                                 #DEFAULT_TAG_HEADER=Disease Class <br/>
                                 #FILE_DESCRIPTION=Human diseases <br/>
                                 #ORGANISM=Human <br/>
+                                #UPLOADER=default <br/>
                                 #GENE_ID_TYPE=GENE NAME(HUGO) <br/>
                                 #DEFAULT_GENES=HLA-A <br/>
                                 <table>

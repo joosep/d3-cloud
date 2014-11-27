@@ -2,6 +2,7 @@
 #DEFAULT_TAG_HEADER=Drug name
 #FILE_DESCRIPTION=Clearity Foundation clinical trials drug interactions
 #ORGANISM=Human
+#UPLOADER=default
 #GENE_ID_TYPE=GENE NAME(HUGO)
 #DEFAULT_GENES=AKT2 AKT3
 Molecular Target	Entrez Gene Name	Enterez Gene Id	Drug name	Other drug name	Pubchem name	CID	SID	Interaction type	Mode of action	Clinical Trial ID(s)	Detail	Phase	Include this entry?	Comments

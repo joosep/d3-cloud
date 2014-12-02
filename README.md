@@ -16,5 +16,6 @@ New data withrightly formatted csv/tsv (see application help page) is added when
 
 ## Needed tools for running application:
 python 2.7
-python watchdog library
+
+python watchdog library (http://pythonhosted.org/watchdog/installation.html)
 

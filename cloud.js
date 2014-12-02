@@ -562,6 +562,8 @@ function refreshHeadersOption(){
           } else {
             header_field.selectedIndex = headers.indexOf(data.DEFAULT_TAG_HEADER);
           }
+          load(gene_text_field);
+          header_field.onchange=hashchange
 }
 
 function processData() {
@@ -588,7 +590,6 @@ function processData() {
         }
         refreshFilesOption();
         organism_field.onchange = refreshFilesOption
-        load(gene_text_field);
     })
     .fail(function(jqXHR,textStatus,errorThrown){
             if (jqXHR.readyState == 4) {

@@ -23,6 +23,8 @@ var fill = d3.scale.category20b();
 var w = 960,
     h = 600;
 
+var isFirstRequest=true;
+
 var words = [],
     max,
     scale = 1,
@@ -136,8 +138,6 @@ d3.select("#download-png").on("click", downloadPNG);
 d3.select("#download-json").on("click", downloadJSON);
 d3.select("#download-csv").on("click", downloadCSV);
 
-d3.select(window).on("hashchange", hashchange);
-
 var header_field = document.getElementById("header_field");
 var file_field = document.getElementById("file_field");
 var organism_field = document.getElementById("organism_field");
@@ -145,7 +145,7 @@ var organism_field = document.getElementById("organism_field");
 var gene_text_field = document.getElementById("text");
 gene_text_field.value=geneNames;
 
-d3.select(window).on("load", hashchange);
+d3.select(window).on("load", reloadCloud);
 var form = d3.select("#form")
     .on("submit", function() {
       load(gene_text_field);
@@ -374,7 +374,7 @@ function downloadCSV() {
    d3.select(this).attr("href","statsbyallgenes.csv?organism="+organism_fieldValue+"&file="+file_fieldValue+"&header="+header_fieldValue+"&genes="+geneNames.join(" "))
 }
 
-function hashchange() {
+function reloadCloud() {
   load(gene_text_field);
 }
 
@@ -534,10 +534,14 @@ function refreshFilesOption(){
             opt.title = data[fileKeys[i]].FILE_DESCRIPTION
             file_field.appendChild(opt);
           }
-          if (params["fileName"] && fileKeys.indexOf(params["fileName"]) != -1) {
-            file_field.selectedIndex = fileKeys.indexOf(params["fileName"]);
-          } else {
-            file_field.selectedIndex = 0;
+          file_field.selectedIndex = 0;
+          if (params["fileName"]) {
+              if (fileKeys.indexOf(params["fileName"]) != -1) {
+                  file_field.selectedIndex = fileKeys.indexOf(params["fileName"]);
+              } else if (isFirstRequest){
+                isFirstRequest = false
+                alert("File '"+params["fileName"]+"' is not in database anymore.")
+              }
           }
           refreshHeadersOption();
 
@@ -557,13 +561,17 @@ function refreshHeadersOption(){
             opt.title = data.header_descriptions[headers[i]]
             header_field.appendChild(opt);
           }
-          if (params["headerName"] && headers.indexOf(params["headerName"]) != -1) {
-            header_field.selectedIndex = headers.indexOf(params["headerName"]);
-          } else {
-            header_field.selectedIndex = headers.indexOf(data.DEFAULT_TAG_HEADER);
+          header_field.selectedIndex = headers.indexOf(data.DEFAULT_TAG_HEADER);
+          if (params["headerName"]) {
+              if (headers.indexOf(params["headerName"]) != -1) {
+                header_field.selectedIndex = headers.indexOf(params["headerName"]);
+              } else if (isFirstRequest){
+                alert("File header '"+params["headerName"]+"' is not in database anymore.")
+              }
           }
+          isFirstRequest = false
           load(gene_text_field);
-          header_field.onchange=hashchange
+          header_field.onchange=reloadCloud
 }
 
 function processData() {
@@ -583,10 +591,14 @@ function processData() {
         opt.title = organismKeys[i];
         organism_field.appendChild(opt);
         }
-        if (params["organismName"] && organismKeys.indexOf(params["organismName"]) != -1) {
-        organism_field.selectedIndex = organismKeys.indexOf(params["organismName"]);
-        } else {
         organism_field.selectedIndex = 0;
+        if (params["organismName"]) {
+            if ( organismKeys.indexOf(params["organismName"]) != -1) {
+                organism_field.selectedIndex = organismKeys.indexOf(params["organismName"]);
+            } else if (isFirstRequest) {
+                isFirstRequest = false
+                alert("Organism '"+params["organismName"]+"' is not in database anymore.")
+            }
         }
         refreshFilesOption();
         organism_field.onchange = refreshFilesOption

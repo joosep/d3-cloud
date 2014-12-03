@@ -540,7 +540,7 @@ function refreshFilesOption(){
                   file_field.selectedIndex = fileKeys.indexOf(params["fileName"]);
               } else if (isFirstRequest){
                 isFirstRequest = false
-                alert("File '"+params["fileName"]+"' is not in database anymore.")
+                alert("File '"+params["fileName"]+"' is not in the database anymore.")
               }
           }
           refreshHeadersOption();
@@ -566,7 +566,7 @@ function refreshHeadersOption(){
               if (headers.indexOf(params["headerName"]) != -1) {
                 header_field.selectedIndex = headers.indexOf(params["headerName"]);
               } else if (isFirstRequest){
-                alert("File header '"+params["headerName"]+"' is not in database anymore.")
+                alert("File header '"+params["headerName"]+"' is not in the database anymore.")
               }
           }
           isFirstRequest = false
@@ -597,7 +597,7 @@ function processData() {
                 organism_field.selectedIndex = organismKeys.indexOf(params["organismName"]);
             } else if (isFirstRequest) {
                 isFirstRequest = false
-                alert("Organism '"+params["organismName"]+"' is not in database anymore.")
+                alert("Organism '"+params["organismName"]+"' is not in the database anymore.")
             }
         }
         refreshFilesOption();

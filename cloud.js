@@ -617,7 +617,7 @@ function resetApplicationOnFail() {
 
 function staticUrl() {
     updateVariables();
-    url = "/cloud.html?organismName="+organism_fieldValue+"&fileName="+file_fieldValue+"&headerName="+header_fieldValue+
+    url = "cloud.html?organismName="+organism_fieldValue+"&fileName="+file_fieldValue+"&headerName="+header_fieldValue+
     "&geneValues="+geneFieldValue+"&spiral="+spiralValue+"&scale="+scaleValue+"&angle-count="+
     angleCountValue+"&angle-from="+angleFromValue+"&angle-to="+angleToValue+
     "&font="+fontValue+"&wordNr="+wordNrValue+"&per-line="+perlineValue;
